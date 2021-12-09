@@ -4,13 +4,14 @@
   "description": "",
   "main": "app.jsx",
   "scripts": {
-    "web.dev": "SET NODE_ENV=development&& webpack --config webpack.config.js --watch  --color",
+    "web.run": "SET NODE_ENV=development&& webpack --config webpack.config.js --watch  --color",
     "web.build": "SET NODE_ENV=production&& webpack --config webpack.config.js --color"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "flux": "^4.0.2",
+    "jquery": "^3.6.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-router-dom": "^6.0.2"

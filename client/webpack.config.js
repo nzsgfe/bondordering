@@ -15,6 +15,7 @@ module.exports = {
            'react-dom',
            'react-router-dom',
            'flux',
+           'jquery'
        ],
        'main': './app/index.jsx'
     },
@@ -67,6 +68,9 @@ module.exports = {
         ]
     },
     plugins: [
+    new webpack.ProvidePlugin({
+        $: "jquery",
+    }),
 		new HtmlWebpackPlugin({
 		    title: 'Bond Ordering',
             template: './app/index.html',
