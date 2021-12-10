@@ -4,8 +4,8 @@
   "description": "",
   "main": "app.jsx",
   "scripts": {
-    "web.run": "SET NODE_ENV=development&& webpack --config webpack.config.js --watch  --color",
-    "web.build": "SET NODE_ENV=production&& webpack --config webpack.config.js --color"
+    "web.run": "webpack --config webpack.config.js --watch  --color",
+    "web.build": "webpack --config webpack.config.js --color"
   },
   "author": "",
   "license": "ISC",

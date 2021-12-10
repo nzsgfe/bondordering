@@ -1,0 +1,6 @@
+export const orderEvents = {
+    ORDER_ADD_PENDING: "ORDER_ADD_PENDING",
+    ORDER_ADD_FAILED: "ORDER_ADD_FAILED",
+    ORDER_ADD_FINISHED: "ORDER_ADD_FINISHED"
+  };
+  
