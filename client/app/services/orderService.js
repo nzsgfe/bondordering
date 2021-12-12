@@ -72,7 +72,3 @@ export function updateNewOrder(newOrder) {
 export function validateBuyerName(newOrder){
   return newOrder.buyerName.trim() !== "";
 }
-
-export function validateBuyerName(newOrder){
-  return newOrder.buyerName.trim() !== "";
-}
