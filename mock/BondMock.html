@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="/Users/thetthetkyawseinwin/Documents/style.css">
 </head>
 
 <body class="body">
@@ -65,16 +65,10 @@
                 </div>
             </div>
             <div class="total-amount-selection">
-                <div class="total-amount-single">
-                    <div class="total-amount-info">Total Amount in USD</div>
-                    <div class="total-amount-info">
-                        <input class="input-style" type="text" id="totalAmount" value="1000" disabled />
-                    </div>
-                </div>
-                <div class="total-amount-single">
-                    <div class="total-amount-info">Total Amount Received</div>
-                    <div class="total-amount-info">
-                        <input class="input-style" value="1000" type="text" id="amountReceived" disabled />
+                <div class="bond-value-info">
+                    <div class="single-selection-info">Bond Value in USD</div>
+                    <div class="single-selection-info">
+                        <input class="input-style" type="text" disabled />
                     </div>
                 </div>
                 <div class="total-currencycode">
@@ -89,6 +83,26 @@
                             list.appendChild(option);
                         });
                     </script>
+                </div>
+                <div class="exhange-rate-info">
+                    <div class="currencycode-info">Exchange Rate</div>
+                    <div class="currencycode-info">
+                        <input class="input-style" type="text" disabled />
+                    </div>
+                </div>
+            </div>
+            <div class="total-amount-selection">
+                <div class="total-amount-single-left">
+                    <div class="total-amount-info">Bond Value in Selected Currency</div>
+                    <div class="total-amount-info">
+                        <input class="input-style" type="text" id="totalAmount" value="1000" disabled />
+                    </div>
+                </div>
+                <div class="total-amount-single-right">
+                    <div class="total-amount-info">Actual Amount in Selected Currency</div>
+                    <div class="total-amount-info">
+                        <input class="input-style" value="1000" type="text" id="amountReceived" />
+                    </div>
                 </div>
             </div>
         </div>
