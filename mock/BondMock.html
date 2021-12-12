@@ -6,12 +6,12 @@
 </head>
 
 <body class="main">
+    <div class="overlay" onclick="">
+        <div class="overlay-text">Loading...</div>
+    </div>
     <div class="header-portal">
         <div class="top-header-portal"> Agent Portal</div>
         <div class="bottom-header-portal">United Bonds</div>
-    </div>
-    <div class="overlay" onclick="">
-        <div class="overlay-text">Loading...</div>
     </div>
     <div class="main-portal">
         <div class="bond-order-header">Information about bond</div>
@@ -19,21 +19,20 @@
             <div class="bond-info-row1-name">
                 <div class="buyer-name-info">Buyer Name</div>
                 <div class="buyer-name-info">
-                    <input class="input-style" type="text" id="buyerName" />
+                    <input class="input-style" type="text" />
                 </div>
             </div>
             <div class="bond-info-row1-date">
                 <div class="payment-date-info">Date of Payment</div>
                 <div class="payment-date-info">
-                    <input class="input-style" type="date" id="date" />
+                    <input class="input-style" type="date" />
                 </div>
             </div>
         </div>
         <div class="bond-info-row2">
             <div class="buyer-email-style">Buyer Email</div>
             <div class="buyer-email-style">
-                <input class="input-style" type="text" id="email" required
-                    oninvalid="this.setCustomValidity('User ID is a must')" />
+                <input class="input-style" type="text" />
             </div>
         </div>
         <div class="bond-info-row3">
@@ -42,25 +41,25 @@
                 <div class="bond-selection-single">
                     <div class="single-selection-info">$ 100 Bond</div>
                     <div class="single-selection-info">
-                        <input class="input-style" type="number" id="quantity" name="quantity" min="0" />
+                        <input class="input-style" type="number" min="0" />
                     </div>
                 </div>
                 <div class="bond-selection-single">
                     <div class="single-selection-info">$ 500 Bond</div>
                     <div class="single-selection-info">
-                        <input class="input-style" type="number" id="quantity" name="quantity" min="0" />
+                        <input class="input-style" type="number" min="0" />
                     </div>
                 </div>
                 <div class="bond-selection-single">
                     <div class="single-selection-info">$ 1000 Bond</div>
                     <div class="single-selection-info">
-                        <input class="input-style" type="number" id="quantity" name="quantity" min="0" />
+                        <input class="input-style" type="number" min="0" />
                     </div>
                 </div>
                 <div class="bond-selection-single">
                     <div class="single-selection-info">$ 5000 Bond</div>
                     <div class="single-selection-info">
-                        <input class="input-style" type="number" id="quantity" name="quantity" min="0" />
+                        <input class="input-style" type="number" min="0" />
                     </div>
                 </div>
             </div>
@@ -73,7 +72,7 @@
                 </div>
                 <div class="total-currencycode">
                     <div class="currencycode-info"></div>
-                    <select class="currencycode-info" name="cars" id="currencyList"></select>
+                    <select class="currencycode-info"></select>
                     <script>
                         let currencyArr = ["USD", "EUR", "SGD", "MMK"];
                         let list = document.getElementById("currencyList");
@@ -95,13 +94,13 @@
                 <div class="total-amount-single-left">
                     <div class="total-amount-info">Bond Value in Selected Currency</div>
                     <div class="total-amount-info">
-                        <input class="input-style" type="text" id="totalAmount" value="1000" disabled />
+                        <input class="input-style" type="text" value="1000" disabled />
                     </div>
                 </div>
                 <div class="total-amount-single-right">
                     <div class="total-amount-info">Actual Amount in Selected Currency</div>
                     <div class="total-amount-info">
-                        <input class="input-style" value="1000" type="text" id="amountReceived" />
+                        <input class="input-style" value="1000" type="text" />
                     </div>
                 </div>
             </div>
