@@ -43,11 +43,12 @@ export default class Order extends React.Component {
 
   _onAddOrderFailed = (data) => {
     this.setState({isLoading: false});
-    alert(data.Error.Message);
+    alert(data.errorMessage);
   };
 
-  _onAddOrderFinished = () => {
+  _onAddOrderFinished = (data) => {
     this.setState({isLoading: false});
+    alert(data.bondOrderId);
   };
 
   _onClearOrder = () => {

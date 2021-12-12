@@ -9,7 +9,7 @@ class orderStore extends EventEmitter {
     dispatcher.register(this._handleActions);
 
     this._addNewOrderRequest = null;
-    this._addNewOrderUrl = "http://www.google.com";
+    this._addNewOrderUrl = "http://127.0.0.1:3000/addneworder";
   }
 
   _addOrder = (payload) => {
@@ -23,14 +23,14 @@ class orderStore extends EventEmitter {
       let successCallBack = (data) => {
         this.emit(orderEvents.ORDER_ADD_FINISHED, {
           Type: orderEvents.ORDER_ADD_FINISHED,
-          Data: {bondOrderId: data.bondOrderId}
+          bondOrderId: data.bondOrderId
         });
       };
 
       let failedCallBack = (data) => {
         this.emit(orderEvents.ORDER_ADD_FAILED, {
           Type: orderEvents.ORDER_ADD_FAILED,
-          Error: {Message: "something got wrong !"}
+          errorMessage: "something got wrong !"
         });
       };
       

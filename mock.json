@@ -1,5 +1,4 @@
 {
-    "addneworder": [{
-        "test": true
-    }]
+    "addneworder": { "bondOrderId": "encrypted-my-favorite-bond-invoice-id" },
+    "currencies": []
 }
