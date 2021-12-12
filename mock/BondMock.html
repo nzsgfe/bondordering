@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="./style.css">
+</head>
+
+<body class="body">
+    <div class="header-portal">
+        <div class="top-header-portal"> Agent Portal</div>
+        <div class="bottom-header-portal">United Bonds</div>
+    </div>
+    <div id="overlay" onclick="">
+        <div id="overlay-text">Loading...</div>
+    </div>
+    <div class="body-portal">
+        <div class="bond-order-header">Information about bond</div>
+        <div class="bond-info-row1">
+            <div class="bond-info-row1-name">
+                <div class="buyer-name-info">Buyer Name</div>
+                <div class="buyer-name-info">
+                    <input class="input-style" type="text" id="buyerName" />
+                </div>
+            </div>
+            <div class="bond-info-row1-date">
+                <div class="payment-date-info">Date of Payment</div>
+                <div class="payment-date-info">
+                    <input class="input-style" type="date" id="date" />
+                </div>
+            </div>
+        </div>
+        <div class="bond-info-row2">
+            <div class="buyer-email-style">Buyer Email</div>
+            <div class="buyer-email-style">
+                <input class="input-style" type="text" id="email" required
+                    oninvalid="this.setCustomValidity('User ID is a must')" />
+            </div>
+        </div>
+        <div class="bond-info-row3">
+            <div class="bond-selection-header">Bond Quantities</div>
+            <div class="bond-selection">
+                <div class="bond-selection-single">
+                    <div class="single-selection-info">$ 100 Bond</div>
+                    <div class="single-selection-info">
+                        <input class="input-style" type="number" id="quantity" name="quantity" min="0" />
+                    </div>
+                </div>
+                <div class="bond-selection-single">
+                    <div class="single-selection-info">$ 500 Bond</div>
+                    <div class="single-selection-info">
+                        <input class="input-style" type="number" id="quantity" name="quantity" min="0" />
+                    </div>
+                </div>
+                <div class="bond-selection-single">
+                    <div class="single-selection-info">$ 1000 Bond</div>
+                    <div class="single-selection-info">
+                        <input class="input-style" type="number" id="quantity" name="quantity" min="0" />
+                    </div>
+                </div>
+                <div class="bond-selection-single">
+                    <div class="single-selection-info">$ 5000 Bond</div>
+                    <div class="single-selection-info">
+                        <input class="input-style" type="number" id="quantity" name="quantity" min="0" />
+                    </div>
+                </div>
+            </div>
+            <div class="total-amount-selection">
+                <div class="total-amount-single">
+                    <div class="total-amount-info">Total Amount in USD</div>
+                    <div class="total-amount-info">
+                        <input class="input-style" type="text" id="totalAmount" value="1000" disabled />
+                    </div>
+                </div>
+                <div class="total-amount-single">
+                    <div class="total-amount-info">Total Amount Received</div>
+                    <div class="total-amount-info">
+                        <input class="input-style" value="1000" type="text" id="amountReceived" disabled />
+                    </div>
+                </div>
+                <div class="total-currencycode">
+                    <div class="currencycode-info"></div>
+                    <select class="currencycode-info" name="cars" id="currencyList"></select>
+                    <script>
+                        let currencyArr = ["USD", "EUR", "SGD", "MMK"];
+                        let list = document.getElementById("currencyList");
+                        currencyArr.forEach((item) => {
+                            let option = document.createElement("option");
+                            option.innerText = item;
+                            list.appendChild(option);
+                        });
+                    </script>
+                </div>
+            </div>
+        </div>
+        <div class="bond-info-row4">
+            <div class="cancel-button">Cancel</div>
+            <div class="submit-button" onclick="onSubmit()">Submit</div>
+            <script>
+                function onSubmit() {
+                    document.getElementById("overlay").style.display = "block";
+                }
+                function onOverlayOff() {
+                    document.getElementById("overlay").style.display = "none";
+                }
+            </script>
+        </div>
+    </div>
+</body>
+
+</html>
