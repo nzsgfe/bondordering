@@ -45,8 +45,8 @@ export function getNewOrder() {
   */
 
   return {
-    "buyerName": null,
-    "buyerEmail": null,
+    "buyerName": "",
+    "buyerEmail": "",
     "paymentDate": new Date(),
     "paymentCurrency": "USD",
     "paymentExchangeRate": 1,
@@ -66,4 +66,12 @@ export function updateNewOrder(newOrder) {
   newOrder.bondValueInUSD = this.getTotalBondValue(newOrder.bondQuantityDetails, this.getBaseCurrency());
   newOrder.bondValueInSelectedCurrency = this.getTotalBondValue(newOrder.bondQuantityDetails, newOrder.paymentCurrency);
   return newOrder;
+}
+
+export function validateBuyerName(newOrder){
+  return newOrder.buyerName.trim() !== "";
+}
+
+export function validateBuyerName(newOrder){
+  return newOrder.buyerName.trim() !== "";
 }
