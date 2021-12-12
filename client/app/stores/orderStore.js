@@ -9,36 +9,31 @@ class orderStore extends EventEmitter {
     dispatcher.register(this._handleActions);
 
     this._addNewOrderRequest = null;
-    this._addNewOrderUrl = null;
+    this._addNewOrderUrl = "http://www.google.com";
   }
 
   _addOrder = (payload) => {
     if (!webUtil.isAjaxRequestPending(this._addNewOrderRequest)) {
+
       this.emit(orderEvents.ORDER_ADD_PENDING, {
         Type: orderEvents.ORDER_ADD_PENDING,
-        Data: {}
+        Data: null
       });
 
       let successCallBack = (data) => {
         this.emit(orderEvents.ORDER_ADD_FINISHED, {
           Type: orderEvents.ORDER_ADD_FINISHED,
-          Data: {}
+          Data: {bondOrderId: data.bondOrderId}
         });
       };
 
       let failedCallBack = (data) => {
         this.emit(orderEvents.ORDER_ADD_FAILED, {
           Type: orderEvents.ORDER_ADD_FAILED,
-          Data: {}
+          Error: {Message: "something got wrong !"}
         });
       };
-
-      this.emit(orderEvents.ORDER_ADD_FINISHED, {
-        Type: orderEvents.ORDER_ADD_FINISHED,
-        Data: {}
-      });
-
-      /*
+      
       this._addNewOrderRequest = webUtil.getAsyncDataByJsonType(
         this._addNewOrderUrl,
         payload,
@@ -46,17 +41,14 @@ class orderStore extends EventEmitter {
         failedCallBack,
         true
       );
-      */
+      
     }
   };
 
   _handleActions = (action) => {
     switch (action.type) {
       case "ORDER_ADD":
-        this._addOrder();
-        break;
-      case "ORDER_EDIT":
-        this._editOrder();
+        this._addOrder(action.data);
         break;
       default:
         break;
