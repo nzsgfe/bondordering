@@ -1,4 +1,5 @@
 import React from 'react';
+import Order from '../order/Order';
 
 export default class Home extends React.Component {
 
@@ -8,7 +9,7 @@ export default class Home extends React.Component {
 
     render(){
         return (
-            <div>I am home</div>
+            <React.Fragment><div>I am home</div><Order /></React.Fragment>
         );
     }
 
