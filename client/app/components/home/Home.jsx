@@ -3,13 +3,13 @@ import Order from '../order/Order';
 
 export default class Home extends React.Component {
 
-    constructor(){
+    constructor() {
         super();
     }
 
-    render(){
+    render() {
         return (
-            <React.Fragment><div>I am home</div><Order /></React.Fragment>
+            <React.Fragment><div>I am home...</div><Order /></React.Fragment>
         );
     }
 
