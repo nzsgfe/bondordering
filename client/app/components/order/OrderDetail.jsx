@@ -154,7 +154,7 @@ export default class OrderDetail extends React.Component {
               <div className="total-amount-single-right">
                 <div className="total-amount-info">Actual Amount in Selected Currency</div>
                 <div className="total-amount-info">
-                  <input className="input-style" value="1000" type="text" />
+                  <input className="input-style" type="text" />
                 </div>
               </div>
             </div>
