@@ -3,7 +3,7 @@ const app = express();
 const path = require("path");
 const config = require('../config.json');
 
-//GitHub testing
+//GitHub testing ver 1
 
 app.use(express.static(path.join(__dirname, '../client/public')));
 app.use(express.json()); 
