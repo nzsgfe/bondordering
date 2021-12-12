@@ -63,6 +63,7 @@ export function getNewOrder() {
 }
 
 export function updateNewOrder(newOrder) {
+  newOrder.paymentExchangeRate = this.getExchangeRate(newOrder.paymentCurrency);
   newOrder.bondValueInUSD = this.getTotalBondValue(newOrder.bondQuantityDetails, this.getBaseCurrency());
   newOrder.bondValueInSelectedCurrency = this.getTotalBondValue(newOrder.bondQuantityDetails, newOrder.paymentCurrency);
   return newOrder;
