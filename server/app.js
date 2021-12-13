@@ -20,3 +20,7 @@ app.post('/addneworder', (req, res) => {
 app.listen(config.port, () => {
     console.log("Application is running on Port " + config.port);
 });
+
+app.post('/getcurrencies', (req, res) => {
+    res.json(mock.currencies);
+});
