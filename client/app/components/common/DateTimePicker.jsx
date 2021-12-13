@@ -14,24 +14,26 @@ export default class DateTimePicker extends React.Component {
             minDate,
             maxDate,
             startDate,
+            classes = "",
             onChange,
             ...otherProps
         } = this.props;
-        
+
         return (
             <DateRangePicker initialSettings={{
-                    singleDatePicker: true,
-                    autoApply: true,
-                    startDate: startDate,
-                    minDate: minDate,
-                    maxDate: maxDate,
-                }}
+                singleDatePicker: true,
+                autoApply: true,
+                startDate: startDate,
+                minDate: minDate,
+                maxDate: maxDate,
+            }}
                 onCallback={onChange}>
-                <div onClick={(e) => {}}>
+                <div onClick={(e) => { }} style={{ position: "relative", width: '100%' }}>
                     <input type="text"
                         value={startDate}
                         {...otherProps}
                     />
+                    <img className="calendar-style" src="../../assets/images/calendarIcon.png" alt="" />
                 </div>
             </DateRangePicker>
         )

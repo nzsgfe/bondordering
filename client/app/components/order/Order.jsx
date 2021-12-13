@@ -30,7 +30,7 @@ export default class Order extends React.Component {
     currencyStore.on(currencyEvents.CURRENCY_GET_FAILED, this._onGetCurrenciesFailed);
     currencyStore.on(currencyEvents.CURRENCY_GET_FINISHED, this._onGetCurrenciesFinished);
 
-    currencyActions.getCurrencies({"dateTime": "newOrder.paymentDate"});
+    currencyActions.getCurrencies({ "dateTime": "newOrder.paymentDate" });
   }
 
   componentWillUnmount() {
@@ -39,7 +39,7 @@ export default class Order extends React.Component {
     orderStore.off(orderEvents.ORDER_ADD_FINISHED, this._onAddOrderFinished);
     currencyStore.off(currencyEvents.CURRENCY_GET_PENDING, this._onGetCurrenciesPending);
     currencyStore.off(currencyEvents.CURRENCY_GET_FAILED, this._onGetCurrenciesFailed);
-    currencyStore.off(currencyEvents.CURRENCY_GET_FINISHED, this._onGetCurrenciesFinished);    
+    currencyStore.off(currencyEvents.CURRENCY_GET_FINISHED, this._onGetCurrenciesFinished);
   }
 
   _onAddNewOrder = (newOrder) => {
@@ -47,38 +47,38 @@ export default class Order extends React.Component {
   }
 
   _onChangeNewOrder = (newOrder) => {
-    this.setState({newOrder: orderService.updateNewOrder(newOrder)});
+    this.setState({ newOrder: orderService.updateNewOrder(newOrder) });
   }
 
   _onAddOrderPending = () => {
-    this.setState({isLoading: true});
+    this.setState({ isLoading: true });
   };
 
   _onAddOrderFailed = (data) => {
-    this.setState({isLoading: false});
+    this.setState({ isLoading: false });
     window.setTimeout(alert(data.errorMessage), 0);
   };
 
   _onAddOrderFinished = (data) => {
-    this.setState({isLoading: false});
+    this.setState({ isLoading: false });
     window.setTimeout(alert(data.bondOrderId), 0);
   };
 
   _onClearOrder = () => {
-    this.setState({newOrder: orderService.getNewOrder()});
+    this.setState({ newOrder: orderService.getNewOrder() });
   }
 
   _onChangePaymentDate = (newOrder) => {
-    this.setState({newOrder: newOrder});
-    currencyActions.getCurrencies({"dateTime": "newOrder.paymentDate"});
+    this.setState({ newOrder: newOrder });
+    currencyActions.getCurrencies({ "dateTime": "newOrder.paymentDate" });
   }
 
   _onGetCurrenciesPending = () => {
-    this.setState({isLoading: true});
+    this.setState({ isLoading: true });
   };
 
   _onGetCurrenciesFailed = (data) => {
-    this.setState({isLoading: true});
+    this.setState({ isLoading: true });
     window.setTimeout(alert(data.errorMessage), 0);
   };
 
@@ -87,7 +87,7 @@ export default class Order extends React.Component {
       isLoading: false,
       newOrder: orderService.updateNewOrder(this.state.newOrder)
     });
-  };  
+  };
 
   render() {
     const currencies = currencyService.getCurrencies();
@@ -97,18 +97,18 @@ export default class Order extends React.Component {
     } = this.state;
 
     return (
-        <React.Fragment>
-            {isLoading &&
-                <Loading />
-            }
-            <OrderDetail newOrder={newOrder}
-                        currencies={currencies} 
-                        isLoading={isLoading} 
-                        onChangeNewOrder={this._onChangeNewOrder}
-                        onAddNewOrder={this._onAddNewOrder}
-                        onChangePaymentDate={this._onChangePaymentDate}
-                        onClearOrder={this._onClearOrder} />
-        </React.Fragment>
+      <React.Fragment>
+        {isLoading &&
+          <Loading />
+        }
+        <OrderDetail newOrder={newOrder}
+          currencies={currencies}
+          isLoading={isLoading}
+          onChangeNewOrder={this._onChangeNewOrder}
+          onAddNewOrder={this._onAddNewOrder}
+          onChangePaymentDate={this._onChangePaymentDate}
+          onClearOrder={this._onClearOrder} />
+      </React.Fragment>
     );
   }
 }
