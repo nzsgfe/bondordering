@@ -106,6 +106,7 @@ export default class Order extends React.Component {
                         isLoading={isLoading} 
                         onChangeNewOrder={this._onChangeNewOrder}
                         onAddNewOrder={this._onAddNewOrder}
+                        onChangePaymentDate={this._onChangePaymentDate}
                         onClearOrder={this._onClearOrder} />
         </React.Fragment>
     );

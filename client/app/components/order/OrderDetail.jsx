@@ -36,7 +36,7 @@ export default class OrderDetail extends React.Component {
     }
 
     _onPaymentDateChange = (changeDate) => {
-        this.props.onChangeNewOrder({
+        this.props.onChangePaymentDate({
             ...this.props.newOrder,
             paymentDate: moment(changeDate).toDate(),
         });
