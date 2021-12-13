@@ -43,7 +43,7 @@ export default class Order extends React.Component {
   }
 
   _onAddNewOrder = (newOrder) => {
-    orderActions.addNewOrder(newOrder);
+    orderActions.addNewOrder(this.state.newOrder);
   }
 
   _onChangeNewOrder = (newOrder) => {
