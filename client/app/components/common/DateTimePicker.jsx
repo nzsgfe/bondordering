@@ -14,9 +14,9 @@ export default class DateTimePicker extends React.Component {
             minDate,
             maxDate,
             startDate,
-            style={},
             classes="",
             onChange,
+            ...otherProps
         } = this.props;
         
         return (
@@ -31,9 +31,7 @@ export default class DateTimePicker extends React.Component {
                 <div onClick={(e) => {}}>
                     <input type="text"
                         value={startDate}
-                        readOnly
-                        disabled
-                        style={style}
+                        {...otherProps}
                         className={classes}
                     />
                 </div>

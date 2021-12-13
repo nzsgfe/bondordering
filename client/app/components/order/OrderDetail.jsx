@@ -12,15 +12,19 @@ export default class OrderDetail extends React.Component {
         const element = event.target;
         const fieldName = element.getAttribute('data-fieldname');
         let changeAttr = null;
-         switch (fieldName) {
-             case 'bondQty':
+        switch (fieldName) {
+            case 'bondQty':
                 const bondType = element.getAttribute('data-bondtype');
-                changeAttr = { bondQuantityDetails: [
-                    ...this.props.newOrder.bondQuantityDetails.filter(bondQuantityDetail => bondQuantityDetail.bondType != bondType),
-                    { bondType, [fieldName]: parseInt(element.value) },
-                ]};
-                 break;
-             default:
+                changeAttr = {
+                    bondQuantityDetails: this.props.newOrder.bondQuantityDetails.map(bondQuantityDetail => {
+                        if (bondQuantityDetail.bondType == bondType) {
+                            return { bondType, [fieldName]: parseInt(element.value) };
+                        }
+                        return bondQuantityDetail;
+                    })
+                };
+                break;
+            default:
                 changeAttr = { [fieldName]: element.value, }
                 break;
          }
@@ -92,7 +96,10 @@ export default class OrderDetail extends React.Component {
                                             maxDate={maxDate} 
                                             startDate={startDate} 
                                             onChange={this._onPaymentDateChange} 
-                                            classes="input-style" />
+                                            readOnly
+                                            disabled
+                                            className="input-style" />
+                            <img className="calendar-style" src="./assets/images/calendarIcon.png" alt="" />
                         </div>
                     </div>
                 </div>
@@ -157,11 +164,9 @@ export default class OrderDetail extends React.Component {
                         </div>
                     </div>
                 </div>
-              </div>
-              <div className="total-amount-single-right">
-                <div className="total-amount-info">Actual Amount in Selected Currency</div>
-                <div className="total-amount-info">
-                  <input className="input-style" type="text" />
+                <div className="bond-info-row4">
+                    <div className="cancel-button" onClick={onClearOrder}>Cancel</div>
+                    <div className="submit-button" onClick={onAddNewOrder}>Submit</div>
                 </div>
             </div>
         </React.Fragment>
