@@ -15,7 +15,8 @@ export default class DateTimePicker extends React.Component {
             maxDate,
             startDate,
             style={},
-            classes=""
+            classes="",
+            onChange,
         } = this.props;
         
         return (
@@ -24,12 +25,11 @@ export default class DateTimePicker extends React.Component {
                     autoApply: true,
                     startDate: startDate,
                     minDate: minDate,
-                    maxDate: maxDate
+                    maxDate: maxDate,
                 }}
-                onApply={(e) => {}}>
+                onCallback={onChange}>
                 <div onClick={(e) => {}}>
                     <input type="text"
-                        name="daterange"
                         value={startDate}
                         readOnly
                         disabled
