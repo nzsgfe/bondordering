@@ -1,27 +1,4 @@
-export function getCurrencies() {
-  return [
-    { CurrencyCode: "SGD", ExchangeRate: 1.37 },
-    { CurrencyCode: "POUND", ExchangeRate: 0.76 },
-    { CurrencyCode: "KYAT", ExchangeRate: 1787 },
-    { CurrencyCode: "USD", ExchangeRate: 1 }
-  ];
-}
-
-export function getBaseCurrency () {
-  return "USD";
-}
-
-export function getExchangeRate(targetCurrencyCode, baseCurrencyCode = "USD") {
-  let currencies = this.getCurrencies();
-  let targetCurrency = currencies.filter(currency => currency.CurrencyCode.toUpperCase() === targetCurrencyCode.toUpperCase()).pop();
-  return targetCurrency ? targetCurrency.ExchangeRate : 1;
-}
-
-export function getTotalBondValue(bonds, currency) {
-  let totalValue = 0;
-  bonds.map((bond) => { totalValue = totalValue + parseInt(bond.bondType) * bond.bondQty });
-  return totalValue * this.getExchangeRate(currency);
-}
+import * as currencyService from "../services/currencyService";
 
 export function getNewOrder() {
 
@@ -62,13 +39,33 @@ export function getNewOrder() {
   }
 }
 
+export function getTotalBondValue(bonds, currencyExchangeRate) {
+  let totalValue = 0;
+  bonds.map((bond) => { totalValue = totalValue + parseInt(bond.bondType) * bond.bondQty });
+  return totalValue * currencyExchangeRate;
+}
+
 export function updateNewOrder(newOrder) {
-  newOrder.paymentExchangeRate = this.getExchangeRate(newOrder.paymentCurrency);
-  newOrder.bondValueInUSD = this.getTotalBondValue(newOrder.bondQuantityDetails, this.getBaseCurrency());
-  newOrder.bondValueInSelectedCurrency = this.getTotalBondValue(newOrder.bondQuantityDetails, newOrder.paymentCurrency);
+  newOrder.paymentExchangeRate = currencyService.getExchangeRate(newOrder.paymentCurrency);
+  newOrder.bondValueInUSD = this.getTotalBondValue(newOrder.bondQuantityDetails, currencyService.getExchangeRate("USD"));
+  newOrder.bondValueInSelectedCurrency = this.getTotalBondValue(newOrder.bondQuantityDetails, newOrder.paymentExchangeRate);
   return newOrder;
 }
 
-export function validateBuyerName(newOrder){
-  return newOrder.buyerName.trim() !== "";
+export function validateBuyerName(name){
+  return name.trim() !== "";
+}
+
+export function validateEmail(email){
+  const regex = new RegExp(/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
+  return regex.test(email.toLowerCase());
+}
+
+export function validateBondQuantityDetails(bondQuantityDetails) {
+  return false;
+}
+
+export function validateTotalBondQuantity(bondQuantityDetails) {
+  let minBondQty = 1;
+  return bondQuantityDetails.map(bond => bond.bondQty).reduce((a, b) => a + b, 0) >= minBondQty;
 }
