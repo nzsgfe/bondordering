@@ -11,7 +11,7 @@ class currencyStore extends EventEmitter {
 
     this._getCurrenciesRequest = null;
     this._getCurrenciesApiUrl = "http://127.0.0.1:3000/getcurrencies";
-    this._currencies = [];
+    this._currencies = [{CurrencyCode: "USD", ExchangeRate: 1}];
   }
 
   _getCurrencies = (payload) => {
@@ -27,7 +27,7 @@ class currencyStore extends EventEmitter {
       let failedCallBack = (data) => {
         this.emit(currencyEvents.CURRENCY_GET_FAILED, {
           Type: currencyEvents.CURRENCY_GET_FAILED,
-          errorMessage: "something got wrong !"
+          errorMessage: "could not retrieve currencies !"
         });
       };
       

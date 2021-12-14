@@ -21,15 +21,18 @@ export function getNewOrder() {
   }
   */
 
+  let paymentCurrency = currencyService.getBaseCurrency();;
+  let paymentExchangeRate = currencyService.getExchangeRate(paymentCurrency);
+
   return {
     "buyerName": "",
     "buyerEmail": "",
     "paymentDate": new Date(),
-    "paymentCurrency": "USD",
-    "paymentExchangeRate": 1,
+    "paymentCurrency": paymentCurrency,
+    "paymentExchangeRate": paymentExchangeRate,
     "bondValueInUSD": 0,
     "bondValueInSelectedCurrency": 0,
-    "actualValueInSelectedCurrency": null,
+    "actualValueInSelectedCurrency": 0,
     "bondQuantityDetails": [
       {"bondType": "100", "bondQty": 0},
       {"bondType": "500", "bondQty": 0},
@@ -68,4 +71,53 @@ export function validateBondQuantityDetails(bondQuantityDetails) {
 export function validateTotalBondQuantity(bondQuantityDetails) {
   let minBondQty = 1;
   return bondQuantityDetails.map(bond => bond.bondQty).reduce((a, b) => a + b, 0) >= minBondQty;
+}
+
+export function autoCorrectAmount(input, allowDecimal, decimalPlaces = 2) {
+  var result = input;
+  var integerPlaces = allowDecimal ? 10 : 12;
+
+  if (allowDecimal) {
+
+      //remove invalid characters
+      result = result.replace(/[^.0-9]/g, '');
+
+      //remove prefix '0';
+      result = result.replace(/^0+(?=\d+)/g, '');
+
+      //remove duplicated '.', 
+      //NOTE: reverse() required for Regx positive-look-after
+      result = result.split('').reverse().join('');
+      result = result.replace(/\.(?=\d*\.)/g, '');
+      result = result.split('').reverse().join('');
+
+      //recover 'no integer part' issue e.g. '.123'
+      result = result.replace(/^\./g, "0.");
+
+      //truncate integer places
+      var integerPart = result.toString().split(".")[0];
+      integerPart = integerPart.substr(0, integerPlaces);
+
+      //truncate decimal places
+      var decimalPart = result.toString().split(".")[1] || "";
+      decimalPart = decimalPart.substr(0, decimalPlaces);
+
+      if(result.indexOf(".") > -1) {
+          return integerPart + "." + decimalPart;                
+      } else {
+          return integerPart;
+      }
+
+  } else {
+
+      //remove invalid characters
+      result = result.replace(/[^0-9]/g, '');
+      
+      //remove prefix '0';
+      result = result.replace(/^0+(?=\d+)/g, '');
+
+      //truncate integer places
+      result = result.substr(0, integerPlaces);
+      return result;
+  }
 }
