@@ -87,9 +87,13 @@ export default class OrderDetail extends React.Component {
           <div className="bond-order-header">Information about bond</div>
           <div className="bond-info-row1">
             <div className="bond-info-row1-name">
-              <div className="buyer-name-info">Buyer Name</div>
               <div className="buyer-name-info">
-                <input className="input-style" onChange={this._onChangeNewOrder} data-fieldname={"buyerName"} type="text" value={buyerName} />
+                Buyer Name
+                {validationResult && validationResult.hasError("buyerName") &&
+                  <span className="error-message-text">{validationResult.getErrorMessage("buyerName")}</span>}
+              </div>
+              <div className="buyer-name-info">
+                <input className={`input-style ${validationResult && validationResult.hasError("buyerName") && "error-border"}`} onChange={this._onChangeNewOrder} data-fieldname={"buyerName"} type="text" value={buyerName} />
               </div>
             </div>
             <div className="bond-info-row1-date">
@@ -106,13 +110,19 @@ export default class OrderDetail extends React.Component {
             </div>
           </div>
           <div className="bond-info-row2">
-            <div className="buyer-email-style">Buyer Email</div>
+            <div className="buyer-email-style">Buyer Email
+              {validationResult && validationResult.hasError("buyerEmail") &&
+                <span className="error-message-text">{validationResult.getErrorMessage("buyerEmail")}</span>}
+            </div>
             <div className="buyer-email-style">
-              <input className="input-style" type="email" onChange={this._onChangeNewOrder} data-fieldname={"buyerEmail"} value={buyerEmail} />
+              <input className={`input-style ${validationResult && validationResult.hasError("buyerEmail") && "error-border"}`} type="email" onChange={this._onChangeNewOrder} data-fieldname={"buyerEmail"} value={buyerEmail} />
             </div>
           </div>
           <div className="bond-info-row3">
-            <div className="bond-selection-header">Bond Quantities</div>
+            <div className="bond-selection-header">Bond Quantities
+              {validationResult && validationResult.hasError("bondQuantityDetails") &&
+                <span className="error-message-text">{validationResult.getErrorMessage("bondQuantityDetails")}</span>}
+            </div>
             <div className="bond-selection">
               {bondQuantityDetails.map(bondQuantityDetail =>
                 <div key={bondQuantityDetail.bondType} className="bond-selection-single">

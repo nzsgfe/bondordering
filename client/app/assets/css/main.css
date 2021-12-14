@@ -107,11 +107,10 @@
 .bond-info-row3{
     display: flex;
     flex-direction: column;
-    padding: 8px 0 8px 0;
+    padding: 20px 0 8px 0;
 }
 .bond-selection-header {
     height: 40px;
-    font-size: 22px;
 }
 .bond-selection{
     display: flex;
@@ -125,6 +124,7 @@
     width: 24%;
 }
 .single-selection-info{
+    font-size: 14px;
     display: flex;
     height: 35px;
 }
@@ -265,4 +265,12 @@
 .warning-message {
     background-color: #edb95e;
     color: #000;
+}
+.error-message-text {
+    color: #EF5350;
+    margin-left: 10px;
+
+}
+.error-border {
+    border: solid 2px #EF5350;
 }
