@@ -1,7 +1,6 @@
 import React from "react";
 import DateTimePicker from '../common/DateTimePicker';
 import Moment from "moment";
-import moment from "moment";
 
 export default class OrderDetail extends React.Component {
 

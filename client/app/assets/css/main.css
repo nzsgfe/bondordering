@@ -43,7 +43,7 @@
     color: white;
     transform: translate(-50%,-50%);
     -ms-transform: translate(-50%,-50%);
-  }
+}
 .main-portal {
     display: flex;
     flex-direction: column;
@@ -211,10 +211,58 @@
     right: 5px;
     top: 3px;
 }
-
-
-
-
-
-
-
+.message-box-style {
+    display: flex;
+    flex-direction: column;
+    background-color: #FAFAF7;
+    width: 500px;
+    height: 300px;
+    border: solid 1px #D8CDCB;
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+    color: #000;
+}
+.message-header{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 32px;
+    height: 80px;
+}
+.message-info {
+    display: flex;
+    flex-direction: column;
+}
+.orderId-style {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    height: 150px;
+    font-size: 22px;
+}
+.copy-icon-div {
+    display: flex;
+    margin-left: 10px;
+}
+.copyIcon-style {
+    width: 25px;
+    height: 25px;
+}
+.button-group {
+    display: flex;
+    flex-direction: row;
+    font-size: 16px;
+    margin-left: auto;
+}
+.success-message{
+    background-color: #4BB543;
+    color: #fff;
+}
+.error-message{
+    background-color: #EF5350;
+    color: #fff;
+}
+.warning-message {
+    background-color: #edb95e;
+    color: #000;
+}

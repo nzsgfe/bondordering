@@ -21,7 +21,7 @@ export default class Order extends React.Component {
       isLoading: true,
       newOrder: orderService.getNewOrder(),
       validationResult: null,
-      isMessageSuccess: false
+      isOpenMessageBox: false
     };
   }
 
@@ -49,8 +49,8 @@ export default class Order extends React.Component {
 
     let validationResult = orderService.validateNewOrder(this.state.newOrder);
 
-    if(validationResult.haveErrors){
-      this.setState({validationResult: validationResult});
+    if (validationResult.haveErrors) {
+      this.setState({ validationResult: validationResult });
     } else {
       orderActions.addNewOrder(this.state.newOrder);
     }
@@ -70,15 +70,15 @@ export default class Order extends React.Component {
   };
 
   _onAddOrderFinished = (data) => {
-    this.setState({ 
+    this.setState({
       isLoading: false,
-      validationResult: null,      
+      validationResult: null,
     });
     window.setTimeout(alert(data.bondOrderId), 0);
   };
 
   _onClearOrder = () => {
-    this.setState({ 
+    this.setState({
       isLoading: false,
       newOrder: orderService.getNewOrder(),
       validationResult: null
@@ -106,13 +106,19 @@ export default class Order extends React.Component {
     });
   };
 
+  closeMessageBox = () => {
+    this.setState({
+      isOpenMessageBox: false
+    })
+  }
+
   render() {
     const currencies = currencyService.getCurrencies();
     const {
       newOrder,
       isLoading,
-      isMessageSuccess,
-      validationResult
+      validationResult,
+      isOpenMessageBox
     } = this.state;
 
     return (
@@ -120,8 +126,14 @@ export default class Order extends React.Component {
         {isLoading &&
           <Loading />
         }
-        {isMessageSuccess &&
-          <MessageDialog />
+        {isOpenMessageBox &&
+          <MessageDialog
+            closeMessageBox={this.closeMessageBox}
+            title={"Title (eg: Success/Error/Warning)"}
+            message={"orderId (if success), Warning Text (warning), Errror Msg (Error)"}
+            messageType={"success-message/error-message,warning-message (must pass either one of them)"}
+            isWarning={"true/false (if it is the warning message)"}
+            isSuccess={"true/false (to show/hide copy icon)"} />
         }
         <OrderDetail newOrder={newOrder}
           currencies={currencies}
