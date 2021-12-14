@@ -21,7 +21,7 @@ export default class Order extends React.Component {
       isLoading: true,
       newOrder: orderService.getNewOrder(),
       validationResult: null,
-      isOpenMessageBox: false
+      message: null
     };
   }
 
@@ -52,7 +52,19 @@ export default class Order extends React.Component {
     if (validationResult.haveErrors) {
       this.setState({ validationResult: validationResult });
     } else {
-      orderActions.addNewOrder(this.state.newOrder);
+      if(orderService.validateActualBondValue(newOrder)){
+        orderActions.addNewOrder(this.state.newOrder);
+      }else{
+        this.setState({ 
+          message: {
+            title: "Warning!",
+            details: "Actual Bond Value not equivalent to Bond Value. Are you sure you want to proceed ?",
+            messageType: "warning-message",
+            onConfirm: (e) => orderActions.addNewOrder(this.state.newOrder),
+            onCancel: this._onCloseMessageBox
+          }
+        });
+      }
     }
   }
 
@@ -65,23 +77,38 @@ export default class Order extends React.Component {
   };
 
   _onAddOrderFailed = (data) => {
-    this.setState({ isLoading: false });
-    window.setTimeout(alert(data.errorMessage), 0);
+    this.setState({ 
+      isLoading: false,
+      message: {
+        title: "Add Order Failed!",
+        details: data.errorMessage,
+        messageType: "error-message",
+        onConfirm: this._onCloseMessageBox,
+        onCancel: null
+      }
+    });
   };
 
   _onAddOrderFinished = (data) => {
     this.setState({
       isLoading: false,
       validationResult: null,
+      message: {
+        title: "Add Order Successful!",
+        details: "OrderId created: " + data.bondOrderId,
+        messageType: "success-message",
+        onConfirm: this._onClearOrder,
+        onCancel: null
+      }
     });
-    window.setTimeout(alert(data.bondOrderId), 0);
   };
 
   _onClearOrder = () => {
     this.setState({
       isLoading: false,
       newOrder: orderService.getNewOrder(),
-      validationResult: null
+      validationResult: null,
+      message: null
     });
   }
 
@@ -95,8 +122,16 @@ export default class Order extends React.Component {
   };
 
   _onGetCurrenciesFailed = (data) => {
-    this.setState({ isLoading: true });
-    window.setTimeout(alert(data.errorMessage), 0);
+    this.setState({ 
+      isLoading: true,
+      message: {
+        title: "Oops could not retrieve currency info",
+        details: data.errorMessage,
+        messageType: "error-message",
+        onConfirm: this._onCloseMessageBox,
+        onCancel: null
+      }      
+    });
   };
 
   _onGetCurrenciesFinished = (data) => {
@@ -106,9 +141,9 @@ export default class Order extends React.Component {
     });
   };
 
-  closeMessageBox = () => {
+  _onCloseMessageBox = () => {
     this.setState({
-      isOpenMessageBox: false
+      message: null
     })
   }
 
@@ -118,7 +153,7 @@ export default class Order extends React.Component {
       newOrder,
       isLoading,
       validationResult,
-      isOpenMessageBox
+      message
     } = this.state;
 
     return (
@@ -126,15 +161,17 @@ export default class Order extends React.Component {
         {isLoading &&
           <Loading />
         }
-        {isOpenMessageBox &&
+        {message &&
           <MessageDialog
-            closeMessageBox={this.closeMessageBox}
-            title={"Title (eg: Success/Error/Warning)"}
-            message={"orderId (if success), Warning Text (warning), Errror Msg (Error)"}
-            messageType={"success-message/error-message,warning-message (must pass either one of them)"}
-            isWarning={"true/false (if it is the warning message)"}
-            isSuccess={"true/false (to show/hide copy icon)"} />
-        }
+            closeMessageBox={this._closeErrorDialog}
+            title={message.title}
+            details={message.details}
+            onConfirm={message.onConfirm}
+            onCancel={message.onCancel}
+            messageType={message.messageType}
+            isWarning={false}
+            isSuccess={false} />
+        }        
         <OrderDetail newOrder={newOrder}
           currencies={currencies}
           validationResult={validationResult}

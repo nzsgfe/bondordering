@@ -70,6 +70,10 @@ export function validateTotalBondQuantity(bondQuantityDetails) {
   return bondQuantityDetails.map(bond => bond.bondQty).reduce((a, b) => a + b, 0) >= minBondQty;
 }
 
+export function validateActualBondValue(estimatedBondValue, actualBondValue) {
+  return parseFloat(estimatedBondValue) > parseFloat(actualBondValue) || parseFloat(estimatedBondValue) < parseFloat(actualBondValue) ;
+}
+
 export function validateNewOrder(newOrder) {
   let inputErrors = []; //{key: "name", errorMsg: "invalid"}; 
 

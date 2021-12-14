@@ -31,7 +31,7 @@ class orderStore extends EventEmitter {
       let failedCallBack = (data) => {
         this.emit(orderEvents.ORDER_ADD_FAILED, {
           Type: orderEvents.ORDER_ADD_FAILED,
-          errorMessage: "something got wrong !"
+          errorMessage: "Oops something went wrong !"
         });
       };
       

@@ -27,7 +27,7 @@ class currencyStore extends EventEmitter {
       let failedCallBack = (data) => {
         this.emit(currencyEvents.CURRENCY_GET_FAILED, {
           Type: currencyEvents.CURRENCY_GET_FAILED,
-          errorMessage: "could not retrieve currencies !"
+          errorMessage: "Oops something went wrong !"
         });
       };
       

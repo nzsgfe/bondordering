@@ -12,17 +12,14 @@ export default class MessageDialog extends React.Component {
         navigator.clipboard.writeText(orderId);
     }
 
-    onCancel = () => {
-        this.props.closeMessageBox;
-    }
-
     render() {
         const {
             title,
-            message,
+            details,
             messageType,
-            isWarning,
-            isSuccess
+            isSuccess,
+            onConfirm,
+            onCancel
         } = this.props;
 
         let headerBg = messageType;
@@ -33,14 +30,14 @@ export default class MessageDialog extends React.Component {
                     <div className="message-box-style">
                         <div className={"message-header " + headerBg}>{title}</div>
                         <div className="message-info">
-                            <div className="orderId-style">{message}
+                            <div className="orderId-style">{details}
                                 {isSuccess && <span className="copy-icon-div" onClick={this.copyToClipboard}>
                                     <img className="copyIcon-style" src="../../assets/images/CopyIcon.png" alt="" />
                                 </span>}
                             </div>
                             <div className="button-group">
-                                {!isWarning && <div className="cancel-button" onClick={this.onCancel}>Cancel</div>}
-                                <div className="submit-button" style={{ marginRight: "15px" }}>{isWarning ? "Continue" : "OK"}</div>
+                                {onCancel && <div className="cancel-button" onClick={onCancel}>Cancel</div>}
+                                {onConfirm && <div className="submit-button" style={{ marginRight: "15px" }} onClick={onConfirm}>Ok</div>}
                             </div>
                         </div>
                     </div>
