@@ -18,8 +18,9 @@ export default class Order extends React.Component {
   constructor() {
     super();
     this.state = {
-      isLoading: false,
+      isLoading: true,
       newOrder: orderService.getNewOrder(),
+      validationResult: null,
       isMessageSuccess: false
     };
   }
@@ -45,7 +46,14 @@ export default class Order extends React.Component {
   }
 
   _onAddNewOrder = (newOrder) => {
-    orderActions.addNewOrder(this.state.newOrder);
+
+    let validationResult = orderService.validateNewOrder(this.state.newOrder);
+
+    if(validationResult.haveErrors){
+      this.setState({validationResult: validationResult});
+    } else {
+      orderActions.addNewOrder(this.state.newOrder);
+    }
   }
 
   _onChangeNewOrder = (newOrder) => {
@@ -62,12 +70,19 @@ export default class Order extends React.Component {
   };
 
   _onAddOrderFinished = (data) => {
-    this.setState({ isLoading: false });
+    this.setState({ 
+      isLoading: false,
+      validationResult: null,      
+    });
     window.setTimeout(alert(data.bondOrderId), 0);
   };
 
   _onClearOrder = () => {
-    this.setState({ newOrder: orderService.getNewOrder() });
+    this.setState({ 
+      isLoading: false,
+      newOrder: orderService.getNewOrder(),
+      validationResult: null
+    });
   }
 
   _onChangePaymentDate = (newOrder) => {
@@ -96,7 +111,8 @@ export default class Order extends React.Component {
     const {
       newOrder,
       isLoading,
-      isMessageSuccess
+      isMessageSuccess,
+      validationResult
     } = this.state;
 
     return (
@@ -109,7 +125,7 @@ export default class Order extends React.Component {
         }
         <OrderDetail newOrder={newOrder}
           currencies={currencies}
-          isLoading={isLoading}
+          validationResult={validationResult}
           onChangeNewOrder={this._onChangeNewOrder}
           onAddNewOrder={this._onAddNewOrder}
           onChangePaymentDate={this._onChangePaymentDate}

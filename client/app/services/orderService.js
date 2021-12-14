@@ -73,6 +73,31 @@ export function validateTotalBondQuantity(bondQuantityDetails) {
   return bondQuantityDetails.map(bond => bond.bondQty).reduce((a, b) => a + b, 0) >= minBondQty;
 }
 
+export function validateNewOrder(newOrder) {
+  let inputErrors = []; //{key: "name", errorMsg: "invalid"}; 
+
+  if(!validateBuyerName(newOrder.buyerName)) {
+    inputErrors.push({key: "buyerName", errorMsg: "Enter name"});
+  }
+
+  if(!this.validateEmail(newOrder.buyerEmail)) {
+    inputErrors.push({key: "buyerEmail", errorMsg: "Enter valid email format e.g. name@mail.com"});
+  }
+
+  if(!this.validateTotalBondQuantity(newOrder.bondQuantityDetails)) {
+    inputErrors.push({key: "bondQuantityDetails", errorMsg: "Fill minimum 1 Qty for at least one bond type"});
+  }  
+
+  //validationResult
+  return {
+    haveErrors: inputErrors.length !== 0,
+    errors: inputErrors,
+    hasError: (key) => inputErrors.filter(error => error.key === key),
+    getErrorMessage: (key) => inputErrors.filter(error => error.key === key).pop()?.errorMsg
+  };
+}
+
+
 export function autoCorrectAmount(input, allowDecimal, decimalPlaces = 2) {
   var result = input;
   var integerPlaces = allowDecimal ? 10 : 12;

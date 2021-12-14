@@ -49,6 +49,7 @@ export default class OrderDetail extends React.Component {
       newOrder,
       onAddNewOrder,
       onClearOrder,
+      validationResult,
     } = this.props;
     const {
       buyerName,
