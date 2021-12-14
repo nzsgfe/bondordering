@@ -12,13 +12,15 @@ import * as currencyService from "../../services/currencyService";
 
 import OrderDetail from './OrderDetail';
 import Loading from '../common/Loading';
+import MessageDialog from '../common/MessageDialog';
 
 export default class Order extends React.Component {
   constructor() {
     super();
     this.state = {
-      isLoading: true,
-      newOrder: orderService.getNewOrder()
+      isLoading: false,
+      newOrder: orderService.getNewOrder(),
+      isMessageSuccess: false
     };
   }
 
@@ -30,7 +32,7 @@ export default class Order extends React.Component {
     currencyStore.on(currencyEvents.CURRENCY_GET_FAILED, this._onGetCurrenciesFailed);
     currencyStore.on(currencyEvents.CURRENCY_GET_FINISHED, this._onGetCurrenciesFinished);
 
-    currencyActions.getCurrencies({ "dateTime": this.state.newOrder.paymentDate});
+    currencyActions.getCurrencies({ "dateTime": this.state.newOrder.paymentDate });
   }
 
   componentWillUnmount() {
@@ -70,7 +72,7 @@ export default class Order extends React.Component {
 
   _onChangePaymentDate = (newOrder) => {
     this.setState({ newOrder: newOrder });
-    currencyActions.getCurrencies({ "dateTime": newOrder.paymentDate});
+    currencyActions.getCurrencies({ "dateTime": newOrder.paymentDate });
   }
 
   _onGetCurrenciesPending = () => {
@@ -94,12 +96,16 @@ export default class Order extends React.Component {
     const {
       newOrder,
       isLoading,
+      isMessageSuccess
     } = this.state;
 
     return (
       <React.Fragment>
         {isLoading &&
           <Loading />
+        }
+        {isMessageSuccess &&
+          <MessageDialog />
         }
         <OrderDetail newOrder={newOrder}
           currencies={currencies}
