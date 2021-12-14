@@ -32,7 +32,7 @@ export function getNewOrder() {
     "paymentExchangeRate": paymentExchangeRate,
     "bondValueInUSD": 0,
     "bondValueInSelectedCurrency": 0,
-    "actualValueInSelectedCurrency": 0,
+    "actualValueInSelectedCurrency": "0",
     "bondQuantityDetails": [
       {"bondType": "100", "bondQty": 0},
       {"bondType": "500", "bondQty": 0},
@@ -52,6 +52,7 @@ export function updateNewOrder(newOrder) {
   newOrder.paymentExchangeRate = currencyService.getExchangeRate(newOrder.paymentCurrency);
   newOrder.bondValueInUSD = this.getTotalBondValue(newOrder.bondQuantityDetails, currencyService.getExchangeRate("USD"));
   newOrder.bondValueInSelectedCurrency = this.getTotalBondValue(newOrder.bondQuantityDetails, newOrder.paymentExchangeRate);
+  newOrder.actualValueInSelectedCurrency = this.autoCorrectAmount(newOrder.actualValueInSelectedCurrency, true, 3);
   return newOrder;
 }
 
@@ -62,10 +63,6 @@ export function validateBuyerName(name){
 export function validateEmail(email){
   const regex = new RegExp(/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
   return regex.test(email.toLowerCase());
-}
-
-export function validateBondQuantityDetails(bondQuantityDetails) {
-  return false;
 }
 
 export function validateTotalBondQuantity(bondQuantityDetails) {
@@ -97,9 +94,8 @@ export function validateNewOrder(newOrder) {
   };
 }
 
-
 export function autoCorrectAmount(input, allowDecimal, decimalPlaces = 2) {
-  var result = input;
+  var result = input.toString();
   var integerPlaces = allowDecimal ? 10 : 12;
 
   if (allowDecimal) {

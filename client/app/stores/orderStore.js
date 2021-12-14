@@ -36,7 +36,11 @@ class orderStore extends EventEmitter {
       };
       
       payload.paymentDate = Moment(payload.paymentDate).format();
-
+      //payload.paymentExchangeRate = parseFloat(payload.paymentExchangeRate);
+      //payload.bondValueInUSD = parseFloat(payload.bondValueInUSD);
+      //payload.bondValueInSelectedCurrency = parseFloat(payload.bondValueInSelectedCurrency);
+      payload.actualValueInSelectedCurrency = parseFloat(payload.actualValueInSelectedCurrency);
+    
       this._addNewOrderRequest = webUtil.getAsyncDataByJsonType(
         this._addNewOrderUrl,
         payload,
