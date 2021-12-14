@@ -1,7 +1,7 @@
 import React from "react";
 import DateTimePicker from '../common/DateTimePicker';
 import Moment from "moment";
-import moment from "moment";
+
 export default class OrderDetail extends React.Component {
 
   constructor(props) {
@@ -35,10 +35,10 @@ export default class OrderDetail extends React.Component {
     });
   }
 
-  _onPaymentDateChange = (changeDate) => {
-    this.props.onChangeNewOrder({
+  _onChangePaymentDate = (changeDate) => {
+    this.props.onChangePaymentDate({
       ...this.props.newOrder,
-      paymentDate: moment(changeDate).toDate(),
+      paymentDate: changeDate,
     });
   }
 
@@ -61,18 +61,20 @@ export default class OrderDetail extends React.Component {
       bondQuantityDetails,
     } = newOrder;
 
-    const minDate = Moment().subtract(29, "days")
+    const minDate = Moment().subtract(2, "days")
       .hour(0)
       .minute(0)
       .second(0)
       .millisecond(0)
       .toDate();
-    const maxDate = Moment().hour(23)
-      .minute(59)
-      .second(59)
-      .millisecond(999)
+    const maxDate = Moment()
+      .hour(0)
+      .minute(0)
+      .second(0)
+      .millisecond(0)
       .toDate();
-    const startDate = Moment(paymentDate).format("MM/DD/YYYY");
+
+    const startDate = Moment(paymentDate);
 
     return (
       <React.Fragment>
@@ -95,7 +97,7 @@ export default class OrderDetail extends React.Component {
                 <DateTimePicker minDate={minDate}
                   maxDate={maxDate}
                   startDate={startDate}
-                  onChange={this._onPaymentDateChange}
+                  onChange={this._onChangePaymentDate}
                   readOnly
                   disabled
                   className="input-style" />

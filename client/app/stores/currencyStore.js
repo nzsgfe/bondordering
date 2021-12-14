@@ -2,6 +2,7 @@ import { EventEmitter } from "events";
 import dispatcher from "../utilities/dispatcher";
 import webUtil from "../utilities/webUtil";
 import { currencyEvents } from "../enums/eventsEmit";
+import Moment from "moment";
 
 class currencyStore extends EventEmitter {
   constructor() {
@@ -30,6 +31,8 @@ class currencyStore extends EventEmitter {
         });
       };
       
+      payload.dateTime = Moment(payload.dateTime).format();
+
       this._getCurrenciesRequest = webUtil.getAsyncDataByJsonType(
         this._getCurrenciesApiUrl,
         payload,

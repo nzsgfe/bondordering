@@ -23,14 +23,14 @@ export default class DateTimePicker extends React.Component {
             <DateRangePicker initialSettings={{
                 singleDatePicker: true,
                 autoApply: true,
-                startDate: startDate,
+                startDate: startDate.format("MM/DD/YYYY"),
                 minDate: minDate,
                 maxDate: maxDate,
             }}
                 onCallback={onChange}>
                 <div onClick={(e) => { }} style={{ position: "relative", width: '100%' }}>
                     <input type="text"
-                        value={startDate}
+                        value={startDate.format("DD/MM/YYYY")}
                         {...otherProps}
                     />
                     <img className="calendar-style" src="../../assets/images/calendarIcon.png" alt="" />

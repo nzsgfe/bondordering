@@ -2,6 +2,7 @@ import { EventEmitter } from "events";
 import dispatcher from "../utilities/dispatcher";
 import webUtil from "../utilities/webUtil";
 import { orderEvents } from "../enums/eventsEmit";
+import Moment from "moment";
 
 class orderStore extends EventEmitter {
   constructor() {
@@ -34,6 +35,8 @@ class orderStore extends EventEmitter {
         });
       };
       
+      payload.paymentDate = Moment(payload.paymentDate).format();
+
       this._addNewOrderRequest = webUtil.getAsyncDataByJsonType(
         this._addNewOrderUrl,
         payload,
