@@ -8,7 +8,7 @@ export default class MessageDialog extends React.Component {
     }
 
     copyToClipboard = () => {
-        let orderId = "this.props.orderId;"
+        let orderId = this.props.details;
         navigator.clipboard.writeText(orderId);
     }
 
@@ -17,7 +17,6 @@ export default class MessageDialog extends React.Component {
             title,
             details,
             messageType,
-            isSuccess,
             onConfirm,
             onCancel
         } = this.props;
@@ -31,7 +30,7 @@ export default class MessageDialog extends React.Component {
                         <div className={"message-header " + headerBg}>{title}</div>
                         <div className="message-info">
                             <div className="orderId-style">{details}
-                                {isSuccess && <span className="copy-icon-div" onClick={this.copyToClipboard}>
+                                {messageType === 'success-message' && <span className="copy-icon-div" onClick={this.copyToClipboard}>
                                     <img className="copyIcon-style" src="../../assets/images/CopyIcon.png" alt="" />
                                 </span>}
                             </div>

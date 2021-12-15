@@ -225,7 +225,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 32px;
+    font-size: 22px;
     height: 80px;
 }
 .message-info {
@@ -239,6 +239,7 @@
     align-items: center;
     height: 150px;
     font-size: 22px;
+    margin: 10px;
 }
 .copy-icon-div {
     display: flex;

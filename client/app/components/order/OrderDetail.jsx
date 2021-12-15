@@ -93,7 +93,8 @@ export default class OrderDetail extends React.Component {
                   <span className="error-message-text">{validationResult.getErrorMessage("buyerName")}</span>}
               </div>
               <div className="buyer-name-info">
-                <input className={`input-style ${validationResult && validationResult.hasError("buyerName") && "error-border"}`} onChange={this._onChangeNewOrder} data-fieldname={"buyerName"} type="text" value={buyerName} />
+                {console.log("Hello..", validationResult && validationResult.hasError("buyerName").length)}
+                <input className={`input-style ${validationResult && validationResult.hasError("buyerName").length > 0 && "error-border"}`} onChange={this._onChangeNewOrder} data-fieldname={"buyerName"} type="text" value={buyerName} />
               </div>
             </div>
             <div className="bond-info-row1-date">
@@ -115,7 +116,7 @@ export default class OrderDetail extends React.Component {
                 <span className="error-message-text">{validationResult.getErrorMessage("buyerEmail")}</span>}
             </div>
             <div className="buyer-email-style">
-              <input className={`input-style ${validationResult && validationResult.hasError("buyerEmail") && "error-border"}`} type="email" onChange={this._onChangeNewOrder} data-fieldname={"buyerEmail"} value={buyerEmail} />
+              <input className={`input-style ${validationResult && validationResult.hasError("buyerEmail").length > 0 && "error-border"}`} type="email" onChange={this._onChangeNewOrder} data-fieldname={"buyerEmail"} value={buyerEmail} />
             </div>
           </div>
           <div className="bond-info-row3">
