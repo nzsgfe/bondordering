@@ -71,7 +71,7 @@ export function validateTotalBondQuantity(bondQuantityDetails) {
 }
 
 export function validateActualBondValue(estimatedBondValue, actualBondValue) {
-  return parseFloat(estimatedBondValue) > parseFloat(actualBondValue) || parseFloat(estimatedBondValue) < parseFloat(actualBondValue) ;
+  return parseFloat(estimatedBondValue) === parseFloat(actualBondValue); //todo
 }
 
 export function validateNewOrder(newOrder) {

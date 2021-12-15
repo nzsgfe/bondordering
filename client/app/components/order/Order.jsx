@@ -45,14 +45,14 @@ export default class Order extends React.Component {
     currencyStore.off(currencyEvents.CURRENCY_GET_FINISHED, this._onGetCurrenciesFinished);
   }
 
-  _onAddNewOrder = (newOrder) => {
+  _onAddNewOrder = () => {
 
     let validationResult = orderService.validateNewOrder(this.state.newOrder);
 
     if (validationResult.haveErrors) {
       this.setState({ validationResult: validationResult });
     } else {
-      if(orderService.validateActualBondValue(newOrder)){
+      if(orderService.validateActualBondValue(this.state.newOrder.bondValueInSelectedCurrency, this.state.newOrder.actualValueInSelectedCurrency)){
         orderActions.addNewOrder(this.state.newOrder);
       }else{
         this.setState({ 
