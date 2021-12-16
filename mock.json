@@ -1,10 +1,10 @@
 {
     "addneworder": { "bondOrderId": "123_XSYDF_ASDLJWE" },
     "currencies": [
-        { "CurrencyCode": "SGD", "ExchangeRate": 1.37 },
-        { "CurrencyCode": "POUND", "ExchangeRate": 0.76 },
-        { "CurrencyCode": "KYAT", "ExchangeRate": 1787 },
-        { "CurrencyCode": "USD", "ExchangeRate": 1 },
-        { "CurrencyCode": "TWD", "ExchangeRate": 27.84 }
+        { "CurrencyCode": "SGD", "ExchangeRate": 1.370 },
+        { "CurrencyCode": "GBP", "ExchangeRate": 0.760 },
+        { "CurrencyCode": "KYAT", "ExchangeRate": 1787.000 },
+        { "CurrencyCode": "USD", "ExchangeRate": 1.000 },
+        { "CurrencyCode": "TWD", "ExchangeRate": 27.840 }
     ]
 }

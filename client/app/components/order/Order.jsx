@@ -55,7 +55,7 @@ export default class Order extends React.Component {
       if(orderService.validateActualBondValue(this.state.newOrder.bondValueInSelectedCurrency, this.state.newOrder.actualValueInSelectedCurrency)){
         orderActions.addNewOrder(this.state.newOrder);
       }else{
-        this.setState({ 
+        this.setState({
           message: {
             title: "Warning!",
             details: "Actual Bond Value not equivalent to Bond Value. Are you sure you want to proceed ?",
@@ -73,7 +73,10 @@ export default class Order extends React.Component {
   }
 
   _onAddOrderPending = () => {
-    this.setState({ isLoading: true });
+    this.setState({ 
+      isLoading: true,
+      message: null
+    });
   };
 
   _onAddOrderFailed = (data) => {
@@ -95,7 +98,7 @@ export default class Order extends React.Component {
       validationResult: null,
       message: {
         title: "Add Order Successful!",
-        details: "OrderId created: " + data.bondOrderId,
+        details: "Bond order submitted with OrderID: " + data.bondOrderId,
         messageType: "success-message",
         onConfirm: this._onClearOrder,
         onCancel: null
@@ -118,7 +121,10 @@ export default class Order extends React.Component {
   }
 
   _onGetCurrenciesPending = () => {
-    this.setState({ isLoading: true });
+    this.setState({ 
+      isLoading: true,
+      message: null
+    });
   };
 
   _onGetCurrenciesFailed = (data) => {

@@ -25,14 +25,27 @@ class currencyStore extends EventEmitter {
       };
 
       let failedCallBack = (data) => {
+        /*
         this.emit(currencyEvents.CURRENCY_GET_FAILED, {
           Type: currencyEvents.CURRENCY_GET_FAILED,
           errorMessage: "Oops something went wrong !"
         });
+        */
       };
       
       payload.dateTime = Moment(payload.dateTime).format();
 
+      successCallBack(
+      [
+        { "CurrencyCode": "SGD", "ExchangeRate": 1.370 },
+        { "CurrencyCode": "GBP", "ExchangeRate": 0.760 },
+        { "CurrencyCode": "KYAT", "ExchangeRate": 1787.000 },
+        { "CurrencyCode": "USD", "ExchangeRate": 1.000 },
+        { "CurrencyCode": "TWD", "ExchangeRate": 27.840 }
+      ]);
+      
+
+      /*
       this._getCurrenciesRequest = webUtil.getAsyncDataByJsonType(
         this._getCurrenciesApiUrl,
         payload,
@@ -40,6 +53,7 @@ class currencyStore extends EventEmitter {
         failedCallBack,
         true
       );
+      */
       
     }
   };

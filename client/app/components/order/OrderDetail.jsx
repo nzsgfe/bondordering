@@ -84,7 +84,7 @@ export default class OrderDetail extends React.Component {
           <div className="bottom-header-portal">United Bonds</div>
         </div>
         <div className="main-portal">
-          <div className="bond-order-header">Information about bond</div>
+          <div className="bond-order-header">Bond Order</div>
           <div className="bond-info-row1">
             <div className="bond-info-row1-name">
               <div className="buyer-name-info">
@@ -93,7 +93,6 @@ export default class OrderDetail extends React.Component {
                   <span className="error-message-text">{validationResult.getErrorMessage("buyerName")}</span>}
               </div>
               <div className="buyer-name-info">
-                {console.log("Hello..", validationResult && validationResult.hasError("buyerName").length)}
                 <input className={`input-style ${validationResult && validationResult.hasError("buyerName").length > 0 && "error-border"}`} onChange={this._onChangeNewOrder} data-fieldname={"buyerName"} type="text" value={buyerName} />
               </div>
             </div>
