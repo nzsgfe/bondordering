@@ -1,6 +1,7 @@
 import React from "react";
 import DateTimePicker from '../common/DateTimePicker';
 import Moment from "moment";
+import Header from '../common/Header';
 
 export default class OrderDetail extends React.Component {
 
@@ -79,10 +80,7 @@ export default class OrderDetail extends React.Component {
 
     return (
       <React.Fragment>
-        <div className="header-portal">
-          <div className="top-header-portal">Agent Portal</div>
-          <div className="bottom-header-portal">United Bonds</div>
-        </div>
+        <Header />
         <div className="main-portal">
           <div className="bond-order-header">Bond Order</div>
           <div className="bond-info-row1">
@@ -177,8 +175,14 @@ export default class OrderDetail extends React.Component {
             </div>
           </div>
           <div className="bond-info-row4">
-            <div className="cancel-button" onClick={onClearOrder}>Cancel</div>
-            <div className="submit-button" onClick={onAddNewOrder}>Submit</div>
+            <div className="cancel-button" onClick={onClearOrder}>
+              <img style={{ width: "15px", height: "15px", marginRight: "10px" }} src="../../assets/images/cancelLogo.png" alt="" />
+              Cancel
+            </div>
+            <div className="submit-button" onClick={onAddNewOrder}>
+              <img style={{ width: "15px", height: "15px", marginRight: "10px" }} src="../../assets/images/submitLogo.png" alt="" />
+              Submit
+            </div>
           </div>
         </div>
       </React.Fragment>
