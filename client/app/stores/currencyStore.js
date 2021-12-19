@@ -10,7 +10,7 @@ class currencyStore extends EventEmitter {
     dispatcher.register(this._handleActions);
 
     this._getCurrenciesRequest = null;
-    this._getCurrenciesApiUrl = "http://127.0.0.1:3000/getcurrencies";
+    this._getCurrenciesApiUrl = "http://127.0.0.1:3000/api/currencies";
     this._currencies = [{CurrencyCode: "USD", ExchangeRate: 1}];
   }
 
@@ -20,7 +20,7 @@ class currencyStore extends EventEmitter {
       this.emit(currencyEvents.CURRENCY_GET_PENDING);
 
       let successCallBack = (data) => {
-        this._currencies = data;
+        this._currencies = data._embedded.currencies.map(currency => { return {"CurrencyCode": currency.currencySymbol, "ExchangeRate": currency.exchangeRate}});
         this.emit(currencyEvents.CURRENCY_GET_FINISHED);
       };
 
@@ -35,17 +35,6 @@ class currencyStore extends EventEmitter {
       
       payload.dateTime = Moment(payload.dateTime).format();
 
-      successCallBack(
-      [
-        { "CurrencyCode": "SGD", "ExchangeRate": 1.370 },
-        { "CurrencyCode": "GBP", "ExchangeRate": 0.760 },
-        { "CurrencyCode": "KYAT", "ExchangeRate": 1787.000 },
-        { "CurrencyCode": "USD", "ExchangeRate": 1.000 },
-        { "CurrencyCode": "TWD", "ExchangeRate": 27.840 }
-      ]);
-      
-
-      /*
       this._getCurrenciesRequest = webUtil.getAsyncDataByJsonType(
         this._getCurrenciesApiUrl,
         payload,
@@ -53,7 +42,6 @@ class currencyStore extends EventEmitter {
         failedCallBack,
         true
       );
-      */
       
     }
   };

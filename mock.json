@@ -1,10 +1,101 @@
 {
     "addneworder": { "bondOrderId": "123_XSYDF_ASDLJWE" },
-    "currencies": [
+    "currenciesOld": [
         { "CurrencyCode": "SGD", "ExchangeRate": 1.370 },
         { "CurrencyCode": "GBP", "ExchangeRate": 0.760 },
         { "CurrencyCode": "KYAT", "ExchangeRate": 1787.000 },
         { "CurrencyCode": "USD", "ExchangeRate": 1.000 },
         { "CurrencyCode": "TWD", "ExchangeRate": 27.840 }
-    ]
+    ],
+    "currencies": {
+        "totalCount": 20,
+        "_links": {
+            "self": {
+                "href": "/api/currencies"
+            }
+        },
+        "_embedded": {
+            "currencies": [{
+                "id": 1,
+                "currencySymbol": "AUD",
+                "exchangeRate": "1.000"
+            }, {
+                "id": 2,
+                "currencySymbol": "CNY",
+                "exchangeRate": "1.000"
+            }, {
+                "id": 3,
+                "currencySymbol": "CZK",
+                "exchangeRate": "1.000"
+            }, {
+                "id": 4,
+                "currencySymbol": "EUR",
+                "exchangeRate": "1.000"
+            }, {
+                "id": 5,
+                "currencySymbol": "HKD",
+                "exchangeRate": "1.000"
+            }, {
+                "id": 6,
+                "currencySymbol": "IDR",
+                "exchangeRate": "1.000"
+            }, {
+                "id": 7,
+                "currencySymbol": "JPY",
+                "exchangeRate": "1.000"
+            }, {
+                "id": 8,
+                "currencySymbol": "MYR",
+                "exchangeRate": "1.000"
+            }, {
+                "id": 9,
+                "currencySymbol": "MMK",
+                "exchangeRate": "1787"
+            }, {
+                "id": 10,
+                "currencySymbol": "NOK",
+                "exchangeRate": "1.000"
+            }, {
+                "id": 11,
+                "currencySymbol": "NZD",
+                "exchangeRate": "1.000"
+            }, {
+                "id": 12,
+                "currencySymbol": "PHP",
+                "exchangeRate": "1.000"
+            }, {
+                "id": 13,
+                "currencySymbol": "SGD",
+                "exchangeRate": "1.37"
+            }, {
+                "id": 14,
+                "currencySymbol": "KRW",
+                "exchangeRate": "1.000"
+            }, {
+                "id": 15,
+                "currencySymbol": "TWD",
+                "exchangeRate": "27.84"
+            }, {
+                "id": 16,
+                "currencySymbol": "THB",
+                "exchangeRate": "1.000"
+            }, {
+                "id": 17,
+                "currencySymbol": "AED",
+                "exchangeRate": "1.000"
+            }, {
+                "id": 18,
+                "currencySymbol": "GBP",
+                "exchangeRate": "0.76"
+            }, {
+                "id": 19,
+                "currencySymbol": "USD",
+                "exchangeRate": "1"
+            }, {
+                "id": 20,
+                "currencySymbol": "VND",
+                "exchangeRate": "1.000"
+            }]
+        }
+    }
 }

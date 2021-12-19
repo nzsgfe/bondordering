@@ -21,6 +21,6 @@ app.listen(config.port, () => {
     console.log("Application is running on Port " + config.port);
 });
 
-app.post('/getcurrencies', (req, res) => {
+app.post('/api/currencies', (req, res) => {
     res.json(mock.currencies);
 });

@@ -55,10 +55,18 @@ export default class Order extends React.Component {
       if(orderService.validateActualBondValue(this.state.newOrder.bondValueInSelectedCurrency, this.state.newOrder.actualValueInSelectedCurrency)){
         orderActions.addNewOrder(this.state.newOrder);
       }else{
+
+        let detailsTemplate = "Actual Bond Value {actualValue} not equivalent to Bond Value {bondValue}. Are you sure you want to proceed ?"
+        
+        let details = detailsTemplate
+          .replace("{actualValue}", this.state.newOrder.actualValueInSelectedCurrency)
+          .replace("{bondValue}", this.state.newOrder.bondValueInSelectedCurrency);
+
         this.setState({
+          validationResult: null,
           message: {
             title: "Warning!",
-            details: "Actual Bond Value not equivalent to Bond Value. Are you sure you want to proceed ?",
+            details: details,
             messageType: "warning-message",
             onConfirm: (e) => orderActions.addNewOrder(this.state.newOrder),
             onCancel: this._onCloseMessageBox
@@ -154,6 +162,7 @@ export default class Order extends React.Component {
   }
 
   render() {
+
     const currencies = currencyService.getCurrencies();
     const {
       newOrder,

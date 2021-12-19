@@ -70,6 +70,10 @@ export function validateTotalBondQuantity(bondQuantityDetails) {
   return bondQuantityDetails.map(bond => bond.bondQty).reduce((a, b) => a + b, 0) >= minBondQty;
 }
 
+export function validateMaxBondQuantity(bondQuantityDetails) {
+  return bondQuantityDetails.filter(bond => parseInt(bond.bondQty) > 9999).length == 0;
+}
+
 export function validateActualBondValue(estimatedBondValue, actualBondValue) {
   return parseFloat(estimatedBondValue) === parseFloat(actualBondValue); //todo
 }
@@ -87,6 +91,12 @@ export function validateNewOrder(newOrder) {
 
   if(!this.validateTotalBondQuantity(newOrder.bondQuantityDetails)) {
     inputErrors.push({key: "bondQuantityDetails", errorMsg: "Fill minimum 1 Qty for at least one bond type"});
+  } else if(!this.validateMaxBondQuantity(newOrder.bondQuantityDetails)) {
+    inputErrors.push({key: "bondQuantityDetails", errorMsg: "Max Qty 9999"});
+  }
+
+  if(parseFloat(newOrder.actualValueInSelectedCurrency) <= 0) {
+    inputErrors.push({key: "actualValueInSelectedCurrency", errorMsg: "Enter value"});
   }  
 
   //validationResult
