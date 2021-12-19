@@ -186,7 +186,7 @@ export default class OrderList extends React.Component {
 
     return (
       <React.Fragment>
-        {/* <Loading /> */}
+        <Loading />
         <Header />
         <div className="table-layout">
           <ToolkitProvider
@@ -194,20 +194,19 @@ export default class OrderList extends React.Component {
             data={ordersList}
             columns={columns}
             exportCSV
+            bootstrap4
           >
             {
               props => (
                 <div>
                   <ExportCSVButton {...props.csvProps}>Export CSV!!</ExportCSVButton>
                   <BootstrapTable
-                    bootstrap4
                     {...props.baseProps}
                     defaultSorted={defaultSorted}
                     pagination={paginationFactory()}
                   />
                 </div>
               )}
-
           </ToolkitProvider>
         </div>
       </React.Fragment>
