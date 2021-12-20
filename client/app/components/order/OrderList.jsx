@@ -4,7 +4,7 @@ import Loading from '../common/Loading';
 
 import BootstrapTable from 'react-bootstrap-table-next';
 import paginationFactory from 'react-bootstrap-table2-paginator';
-import ToolkitProvider, { CSVExport, Search } from 'react-bootstrap-table2-toolkit/dist/react-bootstrap-table2-toolkit.min';
+import ToolkitProvider, { CSVExport } from 'react-bootstrap-table2-toolkit/dist/react-bootstrap-table2-toolkit.min';
 
 import 'react-bootstrap-table-next/dist/react-bootstrap-table2.min.css';
 import 'react-bootstrap-table2-paginator/dist/react-bootstrap-table2-paginator.min.css';
@@ -152,31 +152,53 @@ export default class OrderList extends React.Component {
     let ordersList = this._getSampleData();
 
     const { ExportCSVButton } = CSVExport;
-    const { SearchBar } = Search;
 
     const columns = [
       {
         dataField: 'orderID',
         text: 'Order ID',
-        sort: true
+        sort: true,
+        headerStyle: {
+          backgroundColor: '#F8F9FA',
+          fontSize: '14px'
+        }
       }, {
         dataField: 'paymentDateFormatted',
         text: 'Date',
-        sort: true
+        sort: true,
+        headerStyle: {
+          backgroundColor: '#F8F9FA',
+          fontSize: '14px'
+        }
       }, {
         dataField: 'buyerName',
         text: 'Buyer Name',
-        sort: true
+        sort: true,
+        headerStyle: {
+          backgroundColor: '#F8F9FA',
+          fontSize: '14px'
+        }
       },
       {
         dataField: 'bondValueInUSDFormatted',
         text: 'Total Amount(USD)',
-        sort: true
+        sort: true,
+        headerStyle: {
+          backgroundColor: '#F8F9FA',
+          fontSize: '14px'
+        }
       },
       {
         dataField: 'status',
         text: 'Status',
-        sort: true
+        sort: true,
+        headerStyle: {
+          backgroundColor: '#F8F9FA',
+          fontSize: '14px'
+        },
+        style: {
+          color: '#2196F3'
+        }
       }];
 
     const defaultSorted = [{
@@ -184,11 +206,18 @@ export default class OrderList extends React.Component {
       order: 'desc'
     }];
 
+    const paginationOptions = {
+      sizePerPage: 5,
+      hideSizePerPage: true,
+      hidePageListOnlyOnePage: true
+    };
+
     return (
       <React.Fragment>
-        <Loading />
+        {/* <Loading /> */}
         <Header />
         <div className="table-layout">
+          <span className="bond-order-list-header">Bond Order List</span>
           <ToolkitProvider
             keyField="orderID"
             data={ordersList}
@@ -198,13 +227,18 @@ export default class OrderList extends React.Component {
           >
             {
               props => (
-                <div>
-                  <ExportCSVButton {...props.csvProps}>Export CSV!!</ExportCSVButton>
-                  <BootstrapTable
-                    {...props.baseProps}
-                    defaultSorted={defaultSorted}
-                    pagination={paginationFactory()}
-                  />
+                <div style={{ margin: "15px" }}>
+                  <span style={{ display: "flex", flexDirection: "row" }}>
+                    <div className="add-new-button"> + New</div>
+                    <ExportCSVButton className="export-button" {...props.csvProps}>Export as csv</ExportCSVButton>
+                  </span>
+                  <span className="table-font-style">
+                    <BootstrapTable
+                      {...props.baseProps}
+                      defaultSorted={defaultSorted}
+                      pagination={paginationFactory(paginationOptions)}
+                    />
+                  </span>
                 </div>
               )}
           </ToolkitProvider>
