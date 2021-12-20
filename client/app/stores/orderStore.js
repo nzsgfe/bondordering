@@ -11,6 +11,10 @@ class orderStore extends EventEmitter {
 
     this._addNewOrderRequest = null;
     this._addNewOrderUrl = "http://127.0.0.1:3000/addneworder";
+
+    this._loadOrdersRequest = null;
+    this._loadOrdersUrl=  "http://127.0.0.1:3000/api/bond-orders";
+    this._orders = [];
   }
 
   _addOrder = (payload) => {
@@ -52,11 +56,43 @@ class orderStore extends EventEmitter {
     }
   };
 
+  _loadOrders = () => {
+    if (!webUtil.isAjaxRequestPending(this._loadOrdersRequest)) {
+
+      this.emit(orderEvents.ORDER_LOAD_PENDING);
+
+      let successCallBack = (data) => {
+        this._orders = data._embedded.bondOrders;
+        this.emit(orderEvents.ORDER_LOAD_FINISHED);
+      };
+
+      let failedCallBack = (data) => {
+        this.emit(orderEvents.ORDER_LOAD_FAILED, {
+          Type: orderEvents.ORDER_LOAD_FAILED,
+          errorMessage: "Oops something went wrong !"
+        });
+      };
+
+      this._loadOrdersRequest = webUtil.getAsyncJsonData(
+        this._loadOrdersUrl,
+        successCallBack,
+        failedCallBack
+      );
+    }
+  };
+
+  getOrders(){
+    return this._orders;
+  }
+
   _handleActions = (action) => {
     switch (action.type) {
       case "ORDER_ADD":
         this._addOrder(action.data);
         break;
+      case "ORDER_LOAD":
+          this._loadOrders(action.data);
+          break;        
       default:
         break;
     }

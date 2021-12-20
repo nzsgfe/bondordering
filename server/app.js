@@ -24,3 +24,12 @@ app.listen(config.port, () => {
 app.post('/api/currencies', (req, res) => {
     res.json(mock.currencies);
 });
+
+app.get('/api/bond-orders', (req, res) => {
+    res.json(mock.getBondOrders);
+});
+
+app.post('/api/bond-orders', (req, res) => {
+    res.json(mock.postBondOrders);
+});
+

@@ -1,4 +1,7 @@
 import * as currencyService from "../services/currencyService";
+import * as dateTimeHelper from "../utilities/dateTimeHelper";
+import * as numberHelper from "../utilities/numberHelper";
+import orderStore from "../stores/orderStore";
 
 export function getNewOrder() {
 
@@ -106,6 +109,19 @@ export function validateNewOrder(newOrder) {
     hasError: (key) => inputErrors.filter(error => error.key === key),
     getErrorMessage: (key) => inputErrors.filter(error => error.key === key).pop()?.errorMsg
   };
+}
+
+export function getOrders() {
+
+  const orders = orderStore.getOrders();
+
+  return orders.map(order => {return {
+    "orderId": order.bondOrderId,
+    "buyerName": order.buyerName,
+    "paymentDateFormatted": dateTimeHelper.formatDateTimeStr(order.paymentDate, "yyyy-MM-DD"),
+    "bondValueInUSDFormatted": numberHelper.formatMoney(order.bondValueInUSD, 0),
+    "status": order.bondOrderStatus
+  }});
 }
 
 export function autoCorrectAmount(input, allowDecimal, decimalPlaces = 2) {

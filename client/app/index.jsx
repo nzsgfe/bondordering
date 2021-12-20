@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import {HashRouter as Router, Routes, Route} from "react-router-dom";
 import Home from './components/home/Home';
 import Order from './components/order/Order';
-import OrderList from './components/order/OrderList';
+import OrderListPage from './components/order/OrderListPage';
 import App from './components/App'
 
 ReactDOM.render(
@@ -13,7 +13,7 @@ ReactDOM.render(
                         <Route index element={<Order/>} />
                         <Route path={"test"} element={<Home/>} />
                         <Route path={"/order/add"} element={<Order/>} />
-                        <Route path={"/order/list"} element={<OrderList/>} />
+                        <Route path={"/order/list"} element={<OrderListPage/>} />
                     </Route>
             </Routes>
     </Router>

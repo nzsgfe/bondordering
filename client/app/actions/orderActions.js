@@ -7,3 +7,11 @@ export function addNewOrder(newOrder)
     data: newOrder
   });
 }
+
+export function loadOrders()
+{
+  dispatcher.dispatch({
+    type: "ORDER_LOAD",
+    data: null
+  });
+}
