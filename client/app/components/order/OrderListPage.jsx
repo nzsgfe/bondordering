@@ -9,12 +9,14 @@ import * as orderService from "../../services/orderService";
 //components
 import Loading from '../common/Loading';
 import OrderList from './OrderList';
+import MessageDialog from '../common/MessageDialog';
 
 export default class OrderListPage extends React.Component {
   constructor() {
     super();
     this.state = {
-      isLoading: true
+      isLoading: true,
+      message: null
     };
   }
 
@@ -36,16 +38,31 @@ export default class OrderListPage extends React.Component {
   }
 
   _onLoadOrdersFailed = () => {
-    this.setState({ isLoading: false });
+    this.setState({ 
+      isLoading: false,
+      message: {
+        title: "Load Orders Failed!",
+        details: data.errorMessage,
+        messageType: "error-message",
+        onConfirm: this._onCloseMessageBox,
+        onCancel: null
+      }      
+    });
   }
   
   _onLoadOrdersFinished = () => {
     this.setState({ isLoading: false });
+  }
+
+  _onCloseMessageBox = () => {
+    this.setState({
+      message: null
+    })
   }  
 
   render() {
 
-    const { isLoading } = this.state;
+    const { isLoading, message } = this.state;
     const orders = orderService.getOrders();
 
     console.log("OrderListPage.render");
@@ -53,6 +70,16 @@ export default class OrderListPage extends React.Component {
     return (
       <React.Fragment>
         {isLoading && <Loading />}
+        {message &&
+          <MessageDialog
+            title={message.title}
+            details={message.details}
+            onConfirm={message.onConfirm}
+            onCancel={message.onCancel}
+            messageType={message.messageType}
+            isWarning={false}
+            isSuccess={false} />
+        } 
         <OrderList orders={orders}/>
       </React.Fragment>
     );

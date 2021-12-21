@@ -27,6 +27,7 @@ app.post('/api/currencies', (req, res) => {
 
 app.get('/api/bond-orders', (req, res) => {
     res.json(mock.getBondOrders);
+    //res.json(mock.error);
 });
 
 app.post('/api/bond-orders', (req, res) => {

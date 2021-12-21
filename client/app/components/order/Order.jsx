@@ -178,7 +178,6 @@ export default class Order extends React.Component {
         }
         {message &&
           <MessageDialog
-            closeMessageBox={this._closeErrorDialog}
             title={message.title}
             details={message.details}
             onConfirm={message.onConfirm}
