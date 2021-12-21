@@ -1,7 +1,8 @@
 import React from "react";
-import Header from '../common/Header';
-import Loading from '../common/Loading';
+import { Link } from "react-router-dom";
 
+
+import Header from '../common/Header';
 import BootstrapTable from 'react-bootstrap-table-next';
 import paginationFactory from 'react-bootstrap-table2-paginator';
 import ToolkitProvider, { CSVExport } from 'react-bootstrap-table2-toolkit/dist/react-bootstrap-table2-toolkit.min';
@@ -97,7 +98,7 @@ export default class OrderList extends React.Component {
               props => (
                 <div style={{ margin: "15px" }}>
                   <span style={{ display: "flex", flexDirection: "row" }}>
-                    <div className="add-new-button"> + New</div>
+                    <Link to="/order/add"><div className="add-new-button"> + New</div></Link>
                     <ExportCSVButton className="export-button" {...props.csvProps}>Export as csv</ExportCSVButton>
                   </span>
                   <span className="table-font-style">

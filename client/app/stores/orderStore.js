@@ -10,7 +10,7 @@ class orderStore extends EventEmitter {
     dispatcher.register(this._handleActions);
 
     this._addNewOrderRequest = null;
-    this._addNewOrderUrl = "http://127.0.0.1:3000/addneworder";
+    this._addNewOrderUrl = "http://127.0.0.1:3000/api/bond-orders";
 
     this._loadOrdersRequest = null;
     this._loadOrdersUrl=  "http://127.0.0.1:3000/api/bond-orders";
@@ -20,23 +20,16 @@ class orderStore extends EventEmitter {
   _addOrder = (payload) => {
     if (!webUtil.isAjaxRequestPending(this._addNewOrderRequest)) {
 
-      this.emit(orderEvents.ORDER_ADD_PENDING, {
-        Type: orderEvents.ORDER_ADD_PENDING,
-        Data: null
-      });
+      this.emit(orderEvents.ORDER_ADD_PENDING);
 
       let successCallBack = (data) => {
         this.emit(orderEvents.ORDER_ADD_FINISHED, {
-          Type: orderEvents.ORDER_ADD_FINISHED,
           bondOrderId: data.bondOrderId
         });
       };
 
-      let failedCallBack = (data) => {
-        this.emit(orderEvents.ORDER_ADD_FAILED, {
-          Type: orderEvents.ORDER_ADD_FAILED,
-          errorMessage: "Oops something went wrong !"
-        });
+      let failedCallBack = (errorResponse) => {
+        this.emit(orderEvents.ORDER_ADD_FAILED, errorResponse);
       };
       
       payload.paymentDate = Moment(payload.paymentDate).format();
@@ -66,12 +59,9 @@ class orderStore extends EventEmitter {
         this.emit(orderEvents.ORDER_LOAD_FINISHED);
       };
 
-      let failedCallBack = (data) => {
-        this.emit(orderEvents.ORDER_LOAD_FAILED, {
-          Type: orderEvents.ORDER_LOAD_FAILED,
-          errorMessage: "Oops something went wrong !"
-        });
-      };
+      let failedCallBack = (errorResponse) => {
+        this.emit(orderEvents.ORDER_LOAD_FAILED, errorResponse);
+      };      
 
       this._loadOrdersRequest = webUtil.getAsyncJsonData(
         this._loadOrdersUrl,

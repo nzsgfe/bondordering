@@ -24,13 +24,8 @@ class currencyStore extends EventEmitter {
         this.emit(currencyEvents.CURRENCY_GET_FINISHED);
       };
 
-      let failedCallBack = (data) => {
-        /*
-        this.emit(currencyEvents.CURRENCY_GET_FAILED, {
-          Type: currencyEvents.CURRENCY_GET_FAILED,
-          errorMessage: "Oops something went wrong !"
-        });
-        */
+      let failedCallBack = (errorResponse) => {
+        this.emit(currencyEvents.CURRENCY_GET_FAILED, errorResponse);     
       };
       
       payload.dateTime = Moment(payload.dateTime).format();

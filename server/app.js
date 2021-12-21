@@ -23,14 +23,16 @@ app.listen(config.port, () => {
 
 app.post('/api/currencies', (req, res) => {
     res.json(mock.currencies);
+    //res.status(500).json(mock.error);
 });
 
 app.get('/api/bond-orders', (req, res) => {
     res.json(mock.getBondOrders);
-    //res.json(mock.error);
+    //res.status(500).json(mock.error);
 });
 
 app.post('/api/bond-orders', (req, res) => {
     res.json(mock.postBondOrders);
+    //res.status(500).json(mock.error);
 });
 

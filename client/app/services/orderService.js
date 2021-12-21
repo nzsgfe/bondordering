@@ -5,39 +5,20 @@ import orderStore from "../stores/orderStore";
 
 export function getNewOrder() {
 
-  /*
-  {
-    "buyerName": "John Doe",
-    "buyerEmail": "name.contact@test.com",
-    "paymentDate": "2021-11-13T00:00:00+08:00",
-    "paymentCurrency": "SGD",
-    "paymentExchangeRate": 1.30,
-    "bondValueInUSD": 100,
-    "bondValueInSelectedCurrency": 100,
-    "actualValueInSelectedCurrency": 100,
-    "bondQuantityDetails": [
-      {"bondType": "100", "bondQty": 1},
-      {"bondType": "500", "bondQty": 1},
-      {"bondType": "1000", "bondQty": 1},
-      {"bondType": "5000", "bondQty": 1},
-    ]
-  }
-  */
-
   let paymentCurrency = currencyService.getBaseCurrency();;
   let paymentExchangeRate = currencyService.getExchangeRate(paymentCurrency);
 
   return {
-    "buyerName": "",
-    "buyerEmail": "",
+    "buyerName": "mg p",
+    "buyerEmail": "ngp@mail.com",
     "paymentDate": new Date(),
     "paymentCurrency": paymentCurrency,
     "paymentExchangeRate": paymentExchangeRate,
-    "bondValueInUSD": 0,
+    "bondValueInUSD": 100,
     "bondValueInSelectedCurrency": 0,
-    "actualValueInSelectedCurrency": "0",
+    "actualValueInSelectedCurrency": 100,
     "bondQuantityDetails": [
-      {"bondType": "100", "bondQty": 0},
+      {"bondType": "100", "bondQty": 1},
       {"bondType": "500", "bondQty": 0},
       {"bondType": "1000", "bondQty": 0},
       {"bondType": "5000", "bondQty": 0},

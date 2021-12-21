@@ -84,9 +84,9 @@ class webUtil {
     };
   
     getAsyncJsonData = (actionName, callBack, failedCallBack) => {
-      return $.getJSON(actionName, callBack).fail(function () {
+      return $.getJSON(actionName, callBack).fail((jqXHR, textStats, errorThrown) => {
         if (failedCallBack) {
-          failedCallBack();
+          failedCallBack(jqXHR.responseText ? JSON.parse(jqXHR.responseText) : errorThrown);
         }
       });
     };
@@ -132,10 +132,10 @@ class webUtil {
             if (failedCallBack && textStats !== "abort") {
               if (jqXHR.status === 0 && jqXHR.readyState === 0) {
                 window.setTimeout(() => {
-                  return failedCallBack(errorThrown);
+                  return failedCallBack(jqXHR.responseText ? JSON.parse(jqXHR.responseText) : errorThrown);
                 }, 500);
               } else {
-                return failedCallBack(errorThrown);
+                return failedCallBack(jqXHR.responseText ? JSON.parse(jqXHR.responseText) : errorThrown);
               }
             }
           }

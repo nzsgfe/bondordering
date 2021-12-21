@@ -87,12 +87,12 @@ export default class Order extends React.Component {
     });
   };
 
-  _onAddOrderFailed = (data) => {
+  _onAddOrderFailed = (error) => {
     this.setState({ 
       isLoading: false,
       message: {
-        title: "Add Order Failed!",
-        details: data.errorMessage,
+        title: error.title + " " + error.status,
+        details: error.detail,
         messageType: "error-message",
         onConfirm: this._onCloseMessageBox,
         onCancel: null
@@ -101,6 +101,10 @@ export default class Order extends React.Component {
   };
 
   _onAddOrderFinished = (data) => {
+
+    //todo
+    //refactor routing and route config
+
     this.setState({
       isLoading: false,
       validationResult: null,
@@ -108,7 +112,7 @@ export default class Order extends React.Component {
         title: "Add Order Successful!",
         details: "Bond order submitted with OrderID: " + data.bondOrderId,
         messageType: "success-message",
-        onConfirm: this._onClearOrder,
+        onConfirm: () => window.location.hash = "#/order/list",
         onCancel: null
       }
     });
@@ -135,12 +139,12 @@ export default class Order extends React.Component {
     });
   };
 
-  _onGetCurrenciesFailed = (data) => {
+  _onGetCurrenciesFailed = (error) => {
     this.setState({ 
       isLoading: true,
       message: {
-        title: "Oops could not retrieve currency info",
-        details: data.errorMessage,
+        title: error.title + " " + error.status,
+        details: error.detail,
         messageType: "error-message",
         onConfirm: this._onCloseMessageBox,
         onCancel: null

@@ -1,4 +1,20 @@
 {
+    "newOrder": {
+      "buyerName": "John Doe",
+      "buyerEmail": "name.contact@test.com",
+      "paymentDate": "2021-11-13T00:00:00+08:00",
+      "paymentCurrency": "SGD",
+      "paymentExchangeRate": 1.30,
+      "bondValueInUSD": 100,
+      "bondValueInSelectedCurrency": 100,
+      "actualValueInSelectedCurrency": 100,
+      "bondQuantityDetails": [
+        {"bondType": "100", "bondQty": 1},
+        {"bondType": "500", "bondQty": 1},
+        {"bondType": "1000", "bondQty": 1},
+        {"bondType": "5000", "bondQty": 1}
+      ]
+    },
     "postBondOrders": { "bondOrderId": "123_XSYDF_ASDLJWE" },
     "currenciesOld": [
         { "CurrencyCode": "SGD", "ExchangeRate": 1.370 },

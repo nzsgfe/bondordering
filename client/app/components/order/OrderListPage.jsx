@@ -37,12 +37,12 @@ export default class OrderListPage extends React.Component {
     this.setState({ isLoading: true });
   }
 
-  _onLoadOrdersFailed = () => {
+  _onLoadOrdersFailed = (error) => {
     this.setState({ 
       isLoading: false,
       message: {
-        title: "Load Orders Failed!",
-        details: data.errorMessage,
+        title: error.title + " " + error.status,
+        details: error.detail,
         messageType: "error-message",
         onConfirm: this._onCloseMessageBox,
         onCancel: null
