@@ -91,7 +91,7 @@ export default class OrderList extends React.Component {
             keyField="orderId"
             data={orders}
             columns={columns}
-            exportCSV
+            exportCSV={{ fileName: 'orders.csv'}}
             bootstrap4
           >
             {
