@@ -126,7 +126,7 @@ export default class OrderDetail extends React.Component {
                 <div key={bondQuantityDetail.bondType} className="bond-selection-single">
                   <div className="single-selection-info">$ {bondQuantityDetail.bondType} Bond</div>
                   <div className="single-selection-info">
-                    <input className={"input-style " + (validationResult && validationResult.hasError("bondQuantityDetail") ? "error-border" : "")}
+                    <input className={"input-style " + (validationResult && validationResult.hasError("bondQuantityDetails").length > 0 ? "error-border" : "")}
                       type="number"
                       onChange={this._onChangeNewOrder}
                       data-fieldname={"bondQty"}
@@ -172,7 +172,7 @@ export default class OrderDetail extends React.Component {
                   {validationResult && validationResult.hasError("actualValueInSelectedCurrency") && <span className="error-message-text">{validationResult.getErrorMessage("actualValueInSelectedCurrency")}</span>}
                 </div>
                 <div className="total-amount-info">
-                  <input className={"input-style " + (validationResult && validationResult.hasError("actualValueInSelectedCurrency") ? "error-border" : "")} onChange={this._onChangeNewOrder} data-fieldname={"actualValueInSelectedCurrency"} value={actualValueInSelectedCurrency} type="text" />
+                  <input className={"input-style " + (validationResult && validationResult.hasError("actualValueInSelectedCurrency").length > 0 ? "error-border" : "")} onChange={this._onChangeNewOrder} data-fieldname={"actualValueInSelectedCurrency"} value={actualValueInSelectedCurrency} type="text" />
                 </div>
               </div>
             </div>

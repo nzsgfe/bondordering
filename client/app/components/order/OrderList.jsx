@@ -91,14 +91,14 @@ export default class OrderList extends React.Component {
             keyField="orderId"
             data={orders}
             columns={columns}
-            exportCSV={{ fileName: 'orders.csv'}}
+            exportCSV={{ fileName: 'orders.csv' }}
             bootstrap4
           >
             {
               props => (
                 <div style={{ margin: "15px" }}>
                   <span style={{ display: "flex", flexDirection: "row" }}>
-                    <Link to="/order/add"><div className="add-new-button"> + New</div></Link>
+                    <Link style={{ textDecoration: "none" }} to="/order/add"><div className="add-new-button"> + New</div></Link>
                     <ExportCSVButton className="export-button" {...props.csvProps}>Export as csv</ExportCSVButton>
                   </span>
                   <span className="table-font-style">
