@@ -25,7 +25,8 @@ export default class OrderList extends React.Component {
     const columns = [
       {
         dataField: 'orderId',
-        text: 'Order ID',
+        text: 'Agent Order ID',
+        headerAlign: "center",
         sort: true,
         headerStyle: {
           backgroundColor: '#F8F9FA',
@@ -33,8 +34,9 @@ export default class OrderList extends React.Component {
         }
       }, {
         dataField: 'paymentDateFormatted',
-        text: 'Date',
+        text: 'Submission Date',
         sort: true,
+        headerAlign: "center",
         headerStyle: {
           backgroundColor: '#F8F9FA',
           fontSize: '14px'
@@ -43,6 +45,7 @@ export default class OrderList extends React.Component {
         dataField: 'buyerName',
         text: 'Buyer Name',
         sort: true,
+        headerAlign: "center",
         headerStyle: {
           backgroundColor: '#F8F9FA',
           fontSize: '14px'
@@ -52,15 +55,41 @@ export default class OrderList extends React.Component {
         dataField: 'bondValueInUSDFormatted',
         text: 'Total Amount (USD)',
         sort: true,
+        headerAlign: "center",
+        align: "right",        
         headerStyle: {
           backgroundColor: '#F8F9FA',
           fontSize: '14px'
         }
       },
       {
+        dataField: 'actualValueInSelectedCurrencyFormatted',
+        text: 'Actual Amount',
+        sort: true,
+        headerAlign: "center",
+        align: "right",
+        headerStyle: {
+          backgroundColor: '#F8F9FA',
+          fontSize: '14px'
+        }
+      },
+      {
+        dataField: 'paymentCurrency',
+        text: 'Currency Received',
+        sort: true,
+        headerAlign: "center",
+        align: "center",
+        headerStyle: {
+          backgroundColor: '#F8F9FA',
+          fontSize: '14px'
+        }
+      },       
+      {
         dataField: 'status',
         text: 'Status',
         sort: true,
+        headerAlign: "center",
+        align: "center",        
         headerStyle: {
           backgroundColor: '#F8F9FA',
           fontSize: '14px'

@@ -121,7 +121,10 @@ export function getOrders() {
     "orderId": order.bondOrderId,
     "buyerName": order.buyerName,
     "paymentDateFormatted": dateTimeHelper.formatDateTimeStr(order.paymentDate, "yyyy-MM-DD"),
+    "paymentCurrency": order.paymentCurrency,
     "bondValueInUSDFormatted": numberHelper.formatMoney(order.bondValueInUSD, 0),
-    "status": order.bondOrderStatus
+    "actualValueInSelectedCurrencyFormatted": numberHelper.formatMoney(order.actualValueInSelectedCurrency, 3),
+    "submittedDateFormatted": dateTimeHelper.formatDateTimeStr(order.submittedDate, "yyyy-MM-DD"),
+    "status": order.bondOrderStatus    
   }});
 }
