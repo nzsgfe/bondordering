@@ -124,7 +124,7 @@ export default class OrderDetail extends React.Component {
             <div className="bond-selection">
               {bondQuantityDetails.map(bondQuantityDetail =>
                 <div key={bondQuantityDetail.bondType} className="bond-selection-single">
-                  <div className="single-selection-info">$ {bondQuantityDetail.bondType} Bond</div>
+                  <div className="single-selection-info">USD {bondQuantityDetail.bondType} Bond</div>
                   <div className="single-selection-info">
                     <input className={"input-style " + (validationResult && validationResult.hasError("bondQuantityDetails").length > 0 ? "error-border" : "")}
                       type="number"
@@ -145,7 +145,7 @@ export default class OrderDetail extends React.Component {
                 </div>
               </div>
               <div className="total-currencycode">
-                <div className="currencycode-info"></div>
+                <div className="currencycode-info">Received Currency</div>
                 <select className="currencycode-info" onChange={this._onChangeNewOrder} data-fieldname={"paymentCurrency"} value={paymentCurrency}>
                   {currencies.map(currency =>
                     <option key={currency.CurrencyCode}>{currency.CurrencyCode}</option>
@@ -161,14 +161,14 @@ export default class OrderDetail extends React.Component {
             </div>
             <div className="total-amount-selection">
               <div className="total-amount-single-left">
-                <div className="total-amount-info">Bond Value in Selected Currency</div>
+                <div className="total-amount-info">Bond Value in Received Currency</div>
                 <div className="total-amount-info">
                   <input className="input-style" type="text" value={bondValueInSelectedCurrency} disabled />
                 </div>
               </div>
               <div className="total-amount-single-right">
                 <div className="total-amount-info">
-                  Actual Amount in Selected Currency
+                  Actual Amount in Received Currency
                   {validationResult && validationResult.hasError("actualValueInSelectedCurrency") && <span className="error-message-text">{validationResult.getErrorMessage("actualValueInSelectedCurrency")}</span>}
                 </div>
                 <div className="total-amount-info">
