@@ -8,10 +8,29 @@ export function getNewOrder() {
   let paymentCurrency = currencyService.getBaseCurrency();;
   let paymentExchangeRate = currencyService.getExchangeRate(paymentCurrency);
 
+  
   return {
-    "buyerName": "mg p",
-    "buyerEmail": "ngp@mail.com",
+    "buyerName": "",
+    "buyerEmail": "",
     "paymentDate": new Date(),
+    "paymentCurrency": paymentCurrency,
+    "paymentExchangeRate": paymentExchangeRate,
+    "bondValueInUSD": 0,
+    "bondValueInSelectedCurrency": 0,
+    "actualValueInSelectedCurrency": 0,
+    "bondQuantityDetails": [
+      {"bondType": "100", "bondQty": 0},
+      {"bondType": "500", "bondQty": 0},
+      {"bondType": "1000", "bondQty": 0},
+      {"bondType": "5000", "bondQty": 0},
+    ]
+  }
+  
+  /*
+  return {
+    "buyerName": "John Doe",
+    "buyerEmail": "name.contact@test.com",
+    "paymentDate": "2021-11-13T00:00:00+08:00",
     "paymentCurrency": paymentCurrency,
     "paymentExchangeRate": paymentExchangeRate,
     "bondValueInUSD": 100,
@@ -24,19 +43,21 @@ export function getNewOrder() {
       {"bondType": "5000", "bondQty": 0},
     ]
   }
+  */
+  
 }
 
 export function getTotalBondValue(bonds, currencyExchangeRate) {
   let totalValue = 0;
   bonds.map((bond) => { totalValue = totalValue + parseInt(bond.bondType) * bond.bondQty });
-  return totalValue * currencyExchangeRate;
+  return numberHelper.multiply(totalValue, currencyExchangeRate);
 }
 
 export function updateNewOrder(newOrder) {
   newOrder.paymentExchangeRate = currencyService.getExchangeRate(newOrder.paymentCurrency);
   newOrder.bondValueInUSD = this.getTotalBondValue(newOrder.bondQuantityDetails, currencyService.getExchangeRate("USD"));
   newOrder.bondValueInSelectedCurrency = this.getTotalBondValue(newOrder.bondQuantityDetails, newOrder.paymentExchangeRate);
-  newOrder.actualValueInSelectedCurrency = this.autoCorrectAmount(newOrder.actualValueInSelectedCurrency, true, 3);
+  newOrder.actualValueInSelectedCurrency = numberHelper.autoCorrectAmount(newOrder.actualValueInSelectedCurrency, true, 3);
   return newOrder;
 }
 
@@ -58,8 +79,8 @@ export function validateMaxBondQuantity(bondQuantityDetails) {
   return bondQuantityDetails.filter(bond => parseInt(bond.bondQty) > 9999).length == 0;
 }
 
-export function validateActualBondValue(estimatedBondValue, actualBondValue) {
-  return parseFloat(estimatedBondValue) === parseFloat(actualBondValue); //todo
+export function validateActualBondValue(newOrder) {
+  return numberHelper.equals(newOrder.bondValueInSelectedCurrency, newOrder.actualValueInSelectedCurrency);
 }
 
 export function validateNewOrder(newOrder) {
@@ -79,7 +100,7 @@ export function validateNewOrder(newOrder) {
     inputErrors.push({key: "bondQuantityDetails", errorMsg: "Max Qty 9999"});
   }
 
-  if(parseFloat(newOrder.actualValueInSelectedCurrency) <= 0) {
+  if(!parseFloat(newOrder.actualValueInSelectedCurrency) || parseFloat(newOrder.actualValueInSelectedCurrency) <= 0) {
     inputErrors.push({key: "actualValueInSelectedCurrency", errorMsg: "Enter value"});
   }  
 
@@ -103,53 +124,4 @@ export function getOrders() {
     "bondValueInUSDFormatted": numberHelper.formatMoney(order.bondValueInUSD, 0),
     "status": order.bondOrderStatus
   }});
-}
-
-export function autoCorrectAmount(input, allowDecimal, decimalPlaces = 2) {
-  var result = input.toString();
-  var integerPlaces = allowDecimal ? 10 : 12;
-
-  if (allowDecimal) {
-
-      //remove invalid characters
-      result = result.replace(/[^.0-9]/g, '');
-
-      //remove prefix '0';
-      result = result.replace(/^0+(?=\d+)/g, '');
-
-      //remove duplicated '.', 
-      //NOTE: reverse() required for Regx positive-look-after
-      result = result.split('').reverse().join('');
-      result = result.replace(/\.(?=\d*\.)/g, '');
-      result = result.split('').reverse().join('');
-
-      //recover 'no integer part' issue e.g. '.123'
-      result = result.replace(/^\./g, "0.");
-
-      //truncate integer places
-      var integerPart = result.toString().split(".")[0];
-      integerPart = integerPart.substr(0, integerPlaces);
-
-      //truncate decimal places
-      var decimalPart = result.toString().split(".")[1] || "";
-      decimalPart = decimalPart.substr(0, decimalPlaces);
-
-      if(result.indexOf(".") > -1) {
-          return integerPart + "." + decimalPart;                
-      } else {
-          return integerPart;
-      }
-
-  } else {
-
-      //remove invalid characters
-      result = result.replace(/[^0-9]/g, '');
-      
-      //remove prefix '0';
-      result = result.replace(/^0+(?=\d+)/g, '');
-
-      //truncate integer places
-      result = result.substr(0, integerPlaces);
-      return result;
-  }
 }

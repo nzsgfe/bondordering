@@ -13,10 +13,6 @@ app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, '../client/public/index.html'));
 });
 
-app.post('/addneworder', (req, res) => {
-    res.json(mock.addneworder);
-});
-
 app.listen(config.port, () => {
     console.log("Application is running on Port " + config.port);
 });

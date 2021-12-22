@@ -52,7 +52,7 @@ export default class Order extends React.Component {
     if (validationResult.haveErrors) {
       this.setState({ validationResult: validationResult });
     } else {
-      if(orderService.validateActualBondValue(this.state.newOrder.bondValueInSelectedCurrency, this.state.newOrder.actualValueInSelectedCurrency)){
+      if(orderService.validateActualBondValue(this.state.newOrder)){
         orderActions.addNewOrder(this.state.newOrder);
       }else{
 

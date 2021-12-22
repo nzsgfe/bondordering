@@ -34,8 +34,7 @@ class currencyStore extends EventEmitter {
         this._getCurrenciesApiUrl,
         payload,
         successCallBack,
-        failedCallBack,
-        true
+        failedCallBack
       );
       
     }
