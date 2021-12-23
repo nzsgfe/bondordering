@@ -10,7 +10,7 @@ ReactDOM.render(
     <Router>
             <Routes>
                     <Route path={"/"} element={<App/>}>
-                        <Route index element={<Order/>} />
+                        <Route index element={<OrderListPage/>} />
                         <Route path={"test"} element={<Home/>} />
                         <Route path={"/order/add"} element={<Order/>} />
                         <Route path={"/order/list"} element={<OrderListPage/>} />
