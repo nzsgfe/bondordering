@@ -139,8 +139,8 @@ export default class OrderDetail extends React.Component {
             </div>
             <div className="total-amount-selection">
               <div className="bond-value-info">
-                <div className="single-selection-info">Bond Value in USD</div>
-                <div className="single-selection-info">
+                <div className="bond-value-usd">Bond Value in USD</div>
+                <div className="bond-value-usd">
                   <input className="input-style" type="text" value={bondValueInUSD} disabled />
                 </div>
               </div>
