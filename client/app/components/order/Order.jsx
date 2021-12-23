@@ -33,7 +33,7 @@ export default class Order extends React.Component {
     currencyStore.on(currencyEvents.CURRENCY_GET_FAILED, this._onGetCurrenciesFailed);
     currencyStore.on(currencyEvents.CURRENCY_GET_FINISHED, this._onGetCurrenciesFinished);
 
-    currencyActions.getCurrencies({ "dateTime": this.state.newOrder.paymentDate });
+    currencyActions.getCurrencies({ "dateFrom": this.state.newOrder.paymentDate });
   }
 
   componentWillUnmount() {
