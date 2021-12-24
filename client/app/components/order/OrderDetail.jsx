@@ -81,7 +81,11 @@ export default class OrderDetail extends React.Component {
     return (
       <React.Fragment>
         <Header />
+
         <div className="main-portal">
+          <div className="back-button" onClick={() => window.location.hash = "#/order/list"}>
+            {`< Back`}
+          </div>
           <div className="bond-order-header">Bond Order</div>
           <div className="bond-info-row1">
             <div className="bond-info-row1-name">
@@ -178,9 +182,6 @@ export default class OrderDetail extends React.Component {
             </div>
           </div>
           <div className="bond-info-row4">
-            <div className="cancel-button" onClick={() => window.location.hash = "#/order/list"}>
-              Leave
-            </div>              
             <div className="cancel-button" onClick={onClearOrder}>
               <img style={{ width: "15px", height: "15px", marginRight: "10px" }} src="../../assets/images/cancelLogo.png" alt="" />
               Cancel
