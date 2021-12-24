@@ -9,6 +9,14 @@ export function equals (num1, num2) {
     return Decimal(num1).equals(Decimal(num2));
 }
 
+export function greaterThan (num1, num2) {
+    return Decimal(num1).greaterThan(Decimal(num2));
+}
+
+export function lessThan (num1, num2) {
+    return Decimal(num1).lessThan(Decimal(num2));
+}
+
 export function truncateDecimal (value, decimalPlaces = 2) {
     return Decimal(value).toDecimalPlaces(decimalPlaces, Decimal.ROUND_DOWN).toNumber();
 }
@@ -25,11 +33,13 @@ export function formatMoney(value, decimalPlaces = 2) {
     }
 }
 
-export function autoCorrectAmount(input, allowDecimal, decimalPlaces = 2) {
+export function autoCorrectAmount(input, isAllowEmptyInput, decimalPlaces = 2) {
+
     var result = input.toString();
-    var integerPlaces = allowDecimal ? 10 : 12;
-  
-    if (allowDecimal) {
+    const integerPlaces = 12;
+    const isAllowDecimal = decimalPlaces > 0;
+
+    if (isAllowDecimal) {
   
         //remove invalid characters
         result = result.replace(/[^.0-9]/g, '');
@@ -55,9 +65,9 @@ export function autoCorrectAmount(input, allowDecimal, decimalPlaces = 2) {
         decimalPart = decimalPart.substr(0, decimalPlaces);
   
         if(result.indexOf(".") > -1) {
-            return integerPart + "." + decimalPart;                
+            result = integerPart + "." + decimalPart;                
         } else {
-            return integerPart;
+            result = integerPart;
         }
   
     } else {
@@ -70,6 +80,11 @@ export function autoCorrectAmount(input, allowDecimal, decimalPlaces = 2) {
   
         //truncate integer places
         result = result.substr(0, integerPlaces);
+    }
+
+    if(isAllowEmptyInput) {
         return result;
+    } else {
+        return result.trim() !== "" ? result : "0";
     }
   }

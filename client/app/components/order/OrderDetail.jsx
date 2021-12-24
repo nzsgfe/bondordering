@@ -19,7 +19,7 @@ export default class OrderDetail extends React.Component {
         changeAttr = {
           bondQuantityDetails: this.props.newOrder.bondQuantityDetails.map(bondQuantityDetail => {
             if (bondQuantityDetail.bondType == bondType) {
-              return { bondType, [fieldName]: parseInt(element.value) };
+              return { bondType, [fieldName]: element.value};
             }
             return bondQuantityDetail;
           })
@@ -37,9 +37,18 @@ export default class OrderDetail extends React.Component {
   }
 
   _onChangePaymentDate = (changeDate) => {
+
+    const currentDateTime = Moment();
+
+    const newDate = Moment(changeDate).set({
+      hour:   currentDateTime.get('hour'),
+      minute: currentDateTime.get('minute'),
+      second: currentDateTime.get('second')
+    }).toDate();
+
     this.props.onChangePaymentDate({
       ...this.props.newOrder,
-      paymentDate: changeDate,
+      paymentDate: newDate,
     });
   }
 
@@ -63,19 +72,8 @@ export default class OrderDetail extends React.Component {
       bondQuantityDetails,
     } = newOrder;
 
-    const minDate = Moment().subtract(2, "days")
-      .hour(0)
-      .minute(0)
-      .second(0)
-      .millisecond(0)
-      .toDate();
-    const maxDate = Moment()
-      .hour(0)
-      .minute(0)
-      .second(0)
-      .millisecond(0)
-      .toDate();
-
+    const minDate = Moment().subtract(2, "days");
+    const maxDate = Moment();
     const startDate = Moment(paymentDate);
 
     return (
@@ -131,12 +129,11 @@ export default class OrderDetail extends React.Component {
                   <div className="single-selection-info">USD {bondQuantityDetail.bondType} Bond</div>
                   <div className="single-selection-info">
                     <input className={"input-style " + (validationResult && validationResult.hasError("bondQuantityDetails").length > 0 ? "error-border" : "")}
-                      type="number"
+                      type="text"
                       onChange={this._onChangeNewOrder}
                       data-fieldname={"bondQty"}
                       data-bondtype={bondQuantityDetail.bondType}
-                      value={bondQuantityDetail.bondQty}
-                      min="0" />
+                      value={bondQuantityDetail.bondQty}/>
                   </div>
                 </div>
               )}

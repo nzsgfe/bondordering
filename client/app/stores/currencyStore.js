@@ -28,7 +28,7 @@ class currencyStore extends EventEmitter {
         this.emit(currencyEvents.CURRENCY_GET_FAILED, errorResponse);     
       };
       
-      payload.dateFrom = Moment(payload.dateTime).format();
+      payload.dateFrom = Moment(payload.dateFrom).format();
 
       this._getCurrenciesRequest = webUtil.getAsyncDataByJsonType(
         this._getCurrenciesApiUrl,

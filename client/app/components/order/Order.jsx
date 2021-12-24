@@ -56,7 +56,7 @@ export default class Order extends React.Component {
         orderActions.addNewOrder(this.state.newOrder);
       }else{
 
-        let detailsTemplate = "Actual Bond Value {actualValue} not equivalent to Bond Value {bondValue}. Are you sure you want to proceed ?"
+        let detailsTemplate = "Actual Amount {actualValue} is different from Bond Value {bondValue}. Are you sure you want to proceed?";
         
         let details = detailsTemplate
           .replace("{actualValue}", this.state.newOrder.actualValueInSelectedCurrency)

@@ -8,7 +8,7 @@ export function getNewOrder() {
   let paymentCurrency = currencyService.getBaseCurrency();;
   let paymentExchangeRate = currencyService.getExchangeRate(paymentCurrency);
 
-  
+
   return {
     "buyerName": "",
     "buyerEmail": "",
@@ -30,7 +30,7 @@ export function getNewOrder() {
   return {
     "buyerName": "John Doe",
     "buyerEmail": "name.contact@test.com",
-    "paymentDate": "2021-11-13T00:00:00+08:00",
+    "paymentDate": new Date(),
     "paymentCurrency": paymentCurrency,
     "paymentExchangeRate": paymentExchangeRate,
     "bondValueInUSD": 100,
@@ -44,7 +44,6 @@ export function getNewOrder() {
     ]
   }
   */
-  
 }
 
 export function getTotalBondValue(bonds, currencyExchangeRate) {
@@ -55,6 +54,7 @@ export function getTotalBondValue(bonds, currencyExchangeRate) {
 
 export function updateNewOrder(newOrder) {
   newOrder.paymentExchangeRate = currencyService.getExchangeRate(newOrder.paymentCurrency);
+  newOrder.bondQuantityDetails.forEach(bond => bond.bondQty = parseInt(numberHelper.autoCorrectAmount(bond.bondQty, false, 0)));
   newOrder.bondValueInUSD = this.getTotalBondValue(newOrder.bondQuantityDetails, currencyService.getExchangeRate("USD"));
   newOrder.bondValueInSelectedCurrency = this.getTotalBondValue(newOrder.bondQuantityDetails, newOrder.paymentExchangeRate);
   newOrder.actualValueInSelectedCurrency = numberHelper.autoCorrectAmount(newOrder.actualValueInSelectedCurrency, true, 3);
@@ -62,7 +62,7 @@ export function updateNewOrder(newOrder) {
 }
 
 export function validateBuyerName(name){
-  return name.trim() !== "";
+  return name.trim().length >= 3 && name.trim().length <= 255;
 }
 
 export function validateEmail(email){
@@ -87,7 +87,7 @@ export function validateNewOrder(newOrder) {
   let inputErrors = []; //{key: "name", errorMsg: "invalid"}; 
 
   if(!validateBuyerName(newOrder.buyerName)) {
-    inputErrors.push({key: "buyerName", errorMsg: "Enter name"});
+    inputErrors.push({key: "buyerName", errorMsg: "Enter minimum 3 to maximum 255 characters"});
   }
 
   if(!this.validateEmail(newOrder.buyerEmail)) {
@@ -95,14 +95,14 @@ export function validateNewOrder(newOrder) {
   }
 
   if(!this.validateTotalBondQuantity(newOrder.bondQuantityDetails)) {
-    inputErrors.push({key: "bondQuantityDetails", errorMsg: "Fill minimum 1 Qty for at least one bond type"});
+    inputErrors.push({key: "bondQuantityDetails", errorMsg: "Enter minimum value of 1 for at least one Bond type"});
   } else if(!this.validateMaxBondQuantity(newOrder.bondQuantityDetails)) {
     inputErrors.push({key: "bondQuantityDetails", errorMsg: "Max Qty 9999"});
   }
 
-  if(!parseFloat(newOrder.actualValueInSelectedCurrency) || parseFloat(newOrder.actualValueInSelectedCurrency) <= 0) {
+  if(!numberHelper.greaterThan(newOrder.actualValueInSelectedCurrency, 0)) {
     inputErrors.push({key: "actualValueInSelectedCurrency", errorMsg: "Enter value"});
-  }  
+  }
 
   //validationResult
   return {
