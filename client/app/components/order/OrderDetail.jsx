@@ -145,19 +145,22 @@ export default class OrderDetail extends React.Component {
                   <input className="input-style" type="text" value={bondValueInUSD} disabled />
                 </div>
               </div>
-              <div className="total-currencycode">
-                <div className="currencycode-info">Received Currency</div>
-                <select className="currencycode-info" onChange={this._onChangeNewOrder} data-fieldname={"paymentCurrency"} value={paymentCurrency}>
-                  {currencies.map(currency =>
-                    <option key={currency.CurrencyCode}>{currency.CurrencyCode}</option>
-                  )}
-                </select>
-              </div>
-              <div className="exhange-rate-info">
-                <div className="currencycode-info">Exchange Rate</div>
-                <div className="currencycode-info">
-                  <input className="input-style" type="text" value={paymentExchangeRate} disabled />
+              <div className="currency-div-style">
+                <div className="total-currencycode">
+                  <div className="currencycode-info">Received Currency</div>
+                  <select className="currencycode-info" onChange={this._onChangeNewOrder} data-fieldname={"paymentCurrency"} value={paymentCurrency}>
+                    {currencies.map(currency =>
+                      <option key={currency.CurrencyCode}>{currency.CurrencyCode}</option>
+                    )}
+                  </select>
                 </div>
+                <div className="exhange-rate-info">
+                  <div className="currencycode-info">Exchange Rate</div>
+                  <div className="currencycode-info">
+                    <input className="input-style" type="text" value={paymentExchangeRate} disabled />
+                  </div>
+                </div>
+
               </div>
             </div>
             <div className="total-amount-selection">

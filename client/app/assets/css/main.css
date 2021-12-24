@@ -195,17 +195,23 @@
     display: flex;
     flex-direction: column;
     width: 50%;
+    margin-right: 15px;
 }
 .exhange-rate-style {
     display: flex;
     width: 60px;
 }
+.currency-div-style {
+    display: flex;
+    flex-direction: row;
+    width: 50%;
+    margin-left: 15px;
+}
 .total-currencycode {
     display: flex;
     flex-direction: column;
-    width: 25%;
-	margin-right: 15px;
-    margin-left: 30px;
+    width: 50%;
+    margin-right: 15px;
 }
 .currencycode-info {
     display: flex;
@@ -214,7 +220,7 @@
 .exhange-rate-info {
 	display: flex;
     flex-direction: column;
-    width: 25%;
+    width: 50%;
 }
 .bond-info-row4{
     display: flex;
