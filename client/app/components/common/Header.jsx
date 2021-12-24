@@ -6,6 +6,10 @@ export default class Header extends React.Component {
         super(props);
     }
 
+    _onSignOut() {
+        window.location.href = "/logout";
+    }
+
     render() {
         const {
         } = this.props;
@@ -15,7 +19,7 @@ export default class Header extends React.Component {
                 <div className="sign-out-header">
                     <div className="header-icon-style">
                         <img className="header-logo" src="../../assets/images/signoutLogo.png" alt="" />
-                        <span style={{ fontSize: "14px", paddingLeft: "15px" }}>Sign Out</span>
+                        <span style={{ fontSize: "14px", paddingLeft: "15px", cursor: "pointer" }} onClick={this._onSignOut}>Sign Out</span>
                     </div>
                 </div>
                 <div className="header-details">
