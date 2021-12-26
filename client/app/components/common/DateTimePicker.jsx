@@ -28,7 +28,7 @@ export default class DateTimePicker extends React.Component {
                 maxDate: maxDate,
             }}
                 onCallback={onChange}>
-                <div onClick={(e) => { }} style={{ position: "relative", width: '100%' }}>
+                <div onClick={(e) => { }} className="datetime-div-style">
                     <input type="text"
                         value={startDate.format("DD/MM/YYYY")}
                         {...otherProps}

@@ -56,7 +56,7 @@ export default class OrderList extends React.Component {
         text: 'Total Amount (USD)',
         sort: true,
         headerAlign: "center",
-        align: "right",        
+        align: "right",
         headerStyle: {
           backgroundColor: '#F8F9FA',
           fontSize: '14px'
@@ -83,13 +83,13 @@ export default class OrderList extends React.Component {
           backgroundColor: '#F8F9FA',
           fontSize: '14px'
         }
-      },       
+      },
       {
         dataField: 'status',
         text: 'Status',
         sort: true,
         headerAlign: "center",
-        align: "center",        
+        align: "center",
         headerStyle: {
           backgroundColor: '#F8F9FA',
           fontSize: '14px'
@@ -125,9 +125,9 @@ export default class OrderList extends React.Component {
           >
             {
               props => (
-                <div style={{ margin: "15px" }}>
-                  <span style={{ display: "flex", flexDirection: "row" }}>
-                    <Link style={{ textDecoration: "none" }} to="/order/add"><div className="add-new-button"> + New</div></Link>
+                <div className="list-main-div">
+                  <span className="list-button-div ">
+                    <Link className="back-button-style" to="/order/add"><div className="add-new-button"> + New</div></Link>
                     <ExportCSVButton className="export-button" {...props.csvProps}>Export as csv</ExportCSVButton>
                   </span>
                   <span className="table-font-style">

@@ -78,27 +78,34 @@
     transform: translate(-50%,-50%);
     -ms-transform: translate(-50%,-50%);
 }
-.main-portal {
+.main-portal-div {
     display: flex;
     flex-direction: column;
     margin: 0 auto;
     width: 80%;
-    height: 650px;
     background-color: #FFFFFF;
-    padding: 20px 50px 20px 50px;
-    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
     margin-top: 15px;
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+}
+.main-portal-style {
+    height: 600px;
+    padding: 0 50px 20px 50px;
+}
+.back-div-style {
+    font-size: 18px;
+    color: #6F7377;
+    padding: 10px 0 5px 10px;
+    cursor: pointer;
 }
 .bond-order-header{
     font-size: 22px;
-    height: 63px;
+    height: 50px;
     padding: 10px 0 0 0;
 }
 .bond-info-row1{
     display: flex;
     flex-direction: row;
-    height: 90px;
-    padding: 8px 0 8px 0;
+    height: 80px;
     font-size: 14px;
 }
 .bond-info-row1-name{
@@ -132,8 +139,7 @@
 .bond-info-row2{
     display: flex;
     flex-direction: column;
-    height: 90px;
-    padding: 8px 0 8px 0;
+    height: 80px;
     font-size: 14px;
 }
 .buyer-email-style {
@@ -144,7 +150,6 @@
 .bond-info-row3{
     display: flex;
     flex-direction: column;
-    padding: 20px 0 8px 0;
     font-size: 14px;
 }
 .bond-selection-header {
@@ -154,7 +159,7 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    height: 90px;
+    height: 80px;
 }
 .bond-selection-single {
     display: flex;
@@ -173,7 +178,7 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    height: 90px;
+    height: 80px;
 }
 .total-amount-single-left{
     display: flex;
@@ -225,9 +230,9 @@
 .bond-info-row4{
     display: flex;
     flex-direction: row;
+    justify-content: flex-end;
     align-items: center;
-    margin-left: auto;
-    height: 90px;
+    padding-top: 10px;
     font-size: 14px;
 }
 .cancel-button {
@@ -379,4 +384,31 @@
     margin-bottom: 20px;
     cursor: pointer;
     border-radius: 5px;
+}
+.list-main-div {
+    margin: 15px;
+}
+.list-button-div {
+    display: flex;
+    flex-direction: row;
+}
+.back-button-style {
+    text-decoration: none;
+}
+.button-img-style {
+    width: 15px;
+    height: 15px;
+    margin-right: 10px;
+}
+.msgbox-confirm-style {
+    margin-right: 15px;
+}
+.signout-button-style {
+    font-size: 14px;
+    padding-left: 15px;
+    cursor: pointer;
+}
+.datetime-div-style {
+    position: relative;
+    width: 100%;
 }

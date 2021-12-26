@@ -19,7 +19,7 @@ export default class Header extends React.Component {
                 <div className="sign-out-header">
                     <div className="header-icon-style">
                         <img className="header-logo" src="../../assets/images/signoutLogo.png" alt="" />
-                        <span style={{ fontSize: "14px", paddingLeft: "15px", cursor: "pointer" }} onClick={this._onSignOut}>Sign Out</span>
+                        <span className="signout-button-style" onClick={this._onSignOut}>Sign Out</span>
                     </div>
                 </div>
                 <div className="header-details">
