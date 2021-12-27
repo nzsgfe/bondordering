@@ -36,7 +36,7 @@ export default class MessageDialog extends React.Component {
                             </div>
                             <div className="button-group">
                                 {onCancel && <div className="cancel-button" onClick={onCancel}>Cancel</div>}
-                                {onConfirm && <div className="submit-button" className="msgbox-confirm-style" onClick={onConfirm}>Ok</div>}
+                                {onConfirm && <div className="submit-button msgbox-confirm-style" onClick={onConfirm}>Ok</div>}
                             </div>
                         </div>
                     </div>
